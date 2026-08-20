@@ -1,0 +1,69 @@
+<!-- OPIM 5509 - Module 1 notebooks page.
+     Live at HuskyCT Fall 2026 course _200750_1, content item _14499967_1
+     ("Notebooks for Module 1", inside the "Videos for Module 1" folder).
+
+     NOTE: Blackboard's BBML validator REJECTS target="_blank" on anchors -
+     a PATCH carrying it returns 400 "Invalid Blackboard Markup". Links here
+     are therefore plain href only. Body HTML must also keep the surrounding
+     data-layout-row / data-layout-column / data-bbid wrapper divs that the
+     Ultra editor generates; PATCH {body:{rawText: ...}} with those intact. -->
+
+<h2>Module 1 &mdash; Notebooks</h2>
+
+<p><strong>Everything in Module 1 runs in Google Colab.</strong> Click a link, then <strong>Runtime &rarr; Run all</strong>. There is nothing to download and no Google Drive to mount &mdash; the data loads from stable public sources, so a notebook that works for me works for you.</p>
+
+<p><strong>Before you type anything:</strong> do <em>File &rarr; Save a copy in Drive</em>. The GitHub version is read-only for you, and unsaved edits vanish when the tab closes. Your copy lands in <em>My Drive / Colab Notebooks /</em> &mdash; always that folder, no matter where you opened it from.</p>
+
+<hr>
+
+<h3>Work through these in order</h3>
+
+<ol>
+  <li>
+    <p><strong><a href="https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/0_Welcome_and_Setup.ipynb">1. Welcome &amp; Setup</a></strong><br>
+    Colab, GitHub, checking your library versions, and reading a <code>.shape</code>. Start here even if you feel confident &mdash; it is five minutes and it prevents most week-one problems.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/1_CaliforniaHousing_EDA.ipynb">2. California Housing &mdash; EDA</a></strong><br>
+    What a row actually represents, and two genuine problems hiding in the data: a target that was capped at $500,001, and per-household averages that cannot possibly be true. Also multicollinearity, and a map of California drawn from two ordinary numeric columns.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/2_AllTheModels_Regression.ipynb">3. All the Models &mdash; Regression</a></strong><br>
+    The modeling skeleton, data leakage, five models fit with identical surrounding code, MAE vs RMSE vs R&sup2;, and overfitting made visible as a train/test gap.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/3_AllTheModels_Classification.ipynb">4. All the Models &mdash; Classification</a></strong><br>
+    The same skeleton asked a yes/no question. Confusion matrix in plain business language, precision vs recall, and the idea that carries the whole semester: <code>predict()</code> is just <code>predict_proba()</code> compared against a threshold you chose.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/4_General_EDA_Template.ipynb">5. General EDA Template</a></strong><br>
+    A blank worksheet. Fill it in from memory, and type the code rather than pasting it. Keep a copy &mdash; this is the page to open when the final project lands.</p>
+  </li>
+</ol>
+
+<hr>
+
+<h3>Optional appendix</h3>
+
+<p><strong><a href="https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/5_Appendix_ROC_AUC_and_Thresholds.ipynb">ROC, AUC, and the Decision Threshold</a></strong> &mdash; no video, entirely optional.</p>
+
+<p>If the ROC curve in notebook 4 felt like a plot that appeared out of nowhere, this builds one <em>by hand</em> from twelve loan applicants you can check with a pencil. You watch the false positive rate move as the threshold slides, compute AUC two different ways, and see why the threshold is a business decision rather than a technical one.</p>
+
+<hr>
+
+<h3>Guides</h3>
+
+<ul>
+  <li><a href="https://github.com/drdave-teaching/OPIM5509-notebooks/blob/main/guides/M1_MLRefresher_Video_Guide.md">Video guide</a> &mdash; what each video covers and which notebook it runs on</li>
+  <li><a href="https://github.com/drdave-teaching/OPIM5509-notebooks/blob/main/guides/M1_MLRefresher_Skills.md">Skills sheet</a> &mdash; the checklist of what you should own before Module 2. If more than a few boxes are unchecked, come to office hours in week one.</li>
+</ul>
+
+<hr>
+
+<h3>The one picture to take out of Module 1</h3>
+
+<pre><code>read data  -&gt;  split  -&gt;  scale on train  -&gt;  [ MODEL ]  -&gt;  fit / predict  -&gt;  evaluate</code></pre>
+
+<p>Only the bracketed step changes for the rest of the semester. In Module 2 it becomes a dense neural network and <em>nothing else moves</em>. That is why we spend week one here.</p>
+
+<p><em>All notebooks live at <a href="https://github.com/drdave-teaching/OPIM5509-notebooks/tree/main/Module1">github.com/drdave-teaching/OPIM5509-notebooks</a>.</em></p>
