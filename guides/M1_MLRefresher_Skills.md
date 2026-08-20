@@ -69,6 +69,17 @@ Nothing on this list is new material. All of it is assumed from here forward.
 - [ ] Move the threshold and describe how precision and recall trade against each other
 - [ ] Interpret an **AUC** and explain why it is threshold-free
 
+## 📈 Optional — ROC, AUC, and thresholds
+*Notebook: `Module1/5_Appendix_ROC_AUC_and_Thresholds.ipynb` (no video)*
+
+- [ ] Build an ROC curve from a confusion-matrix table **by hand**, without calling a library
+- [ ] Explain why each step on the curve goes **up** for a true positive and **right** for a false positive
+- [ ] Say what lowering the threshold does to TPR *and* FPR at the same time — and why you cannot improve one for free
+- [ ] Define AUC two ways: area under the curve, **and** the probability a random positive outranks a random negative
+- [ ] Explain why AUC measures **ranking**, not calibration, and does not choose your threshold
+- [ ] Pick a threshold from the **cost** of each mistake instead of defaulting to 0.5
+- [ ] Say why ROC flatters a model when positives are rare, and what to report instead
+
 ## 🌉 Carrying it into Module 2
 
 - [ ] Say what changes when a random forest becomes a neural network — and what does not

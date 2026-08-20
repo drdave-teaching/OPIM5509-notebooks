@@ -22,6 +22,7 @@ Six notebooks that rebuild the ML workflow every neural network in this course s
 | All the Models — Classification | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/3_AllTheModels_Classification.ipynb) |
 | General EDA Template | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/4_General_EDA_Template.ipynb) |
 | Assignment 1 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/Assignment1_OPIM5509.ipynb) |
+| Appendix — ROC, AUC & Thresholds *(optional)* | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/5_Appendix_ROC_AUC_and_Thresholds.ipynb) |
 
 ---
 

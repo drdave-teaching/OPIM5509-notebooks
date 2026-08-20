@@ -16,6 +16,8 @@
 
 Notebooks for this module: **[Module 1 →](../Module1/)**
 
+There is also an **optional appendix** with no video — [`5_Appendix_ROC_AUC_and_Thresholds.ipynb`](../Module1/5_Appendix_ROC_AUC_and_Thresholds.ipynb) — for students who want the ROC curve built from scratch rather than handed to them.
+
 ---
 
 ## About the 🔴 markers

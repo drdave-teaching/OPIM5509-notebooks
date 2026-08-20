@@ -24,6 +24,7 @@ Only the bracketed step ever changes. In Module 2 it becomes a dense neural netw
 | **4** | **All the Models — Classification** | Confusion matrix, precision vs recall, `predict_proba`, ROC/AUC | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/3_AllTheModels_Classification.ipynb) |
 | **5** | **General EDA Template** | A blank worksheet to fill in from memory | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/4_General_EDA_Template.ipynb) |
 | **6** | **Assignment 1** | Your turn, on messy data you have not seen | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/Assignment1_OPIM5509.ipynb) |
+| **7** | **Appendix — ROC, AUC & Thresholds** | *Optional, no video.* Build an ROC curve by hand, then watch the threshold move the false positive rate | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module1/5_Appendix_ROC_AUC_and_Thresholds.ipynb) |
 
 > **Save a copy before you type.** `File → Save a copy in Drive`. The GitHub version is read-only for you, and unsaved edits vanish when the tab closes.
 
