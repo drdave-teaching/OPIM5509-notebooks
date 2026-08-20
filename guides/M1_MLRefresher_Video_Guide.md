@@ -13,13 +13,13 @@ The 🔴 markers inside the notebooks show exactly where each video starts.
 
 ## Notebook 1 · `Module1/0_Welcome_and_Setup.ipynb`
 
-**The big ideas:** Colab as the course computer · save-a-copy before you type · reading library versions · where notebooks, data, the ebook, and grades each live · `.shape` as the language of deep learning.
+**The big ideas:** Colab as the course computer · save-a-copy before you type · where that copy actually goes · reading library versions · where notebooks, data, the ebook, and grades each live · `.shape` as the language of deep learning.
 
 **Video 1 — Welcome to OPIM 5509**
 What the semester looks like and what Module 1 is for. Module 1 is a *refresh*, not new material — if it feels easy that is the design working, and if it feels hard that is an early warning worth acting on in week one rather than week nine. Covers the prerequisites honestly (5604 required, 5512 strongly suggested), the two textbooks, and the async rhythm.
 
 **Video 2 — Setting up Colab and running a course notebook**
-Done live on screen: open the repo, click the Colab badge, `File > Save a copy in Drive`, `Runtime > Run all`. Includes the deliberate demo of the bug every student hits eventually — running cells out of order, getting a `NameError`, and fixing it with restart-and-run-all. Ends by pointing at the GPU menu without switching to it, so the path is familiar when Module 3 needs it.
+Done live on screen: open the repo, click the Colab badge, `File > Save a copy in Drive`, `Runtime > Run all`. Includes the **“Where did it go?!”** beat — the copy lands in `My Drive / Colab Notebooks /`, always, no matter where you opened it from — plus `File > Locate in Drive` and a plea to rename files and make a course folder. Also carries the deliberate demo of the bug every student hits eventually — running cells out of order, getting a `NameError`, and fixing it with restart-and-run-all. Ends by pointing at the GPU menu without switching to it, so the path is familiar when Module 3 needs it.
 
 ---
 

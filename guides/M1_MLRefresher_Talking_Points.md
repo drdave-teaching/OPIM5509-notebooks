@@ -26,6 +26,10 @@ Everything below also lives inside the notebooks as hidden comments under each �
 
 - **Show, do not tell.** Screen share: go to the GitHub repo, open a notebook, click the Colab badge, watch it load.
 - Then immediately `File > Save a copy in Drive`. Show the "Copy of ..." title change. Say out loud: *"this is now MY notebook."*
+- **"Where did it go?!"** Ask it out loud right after the save, then answer it: `My Drive / Colab Notebooks / Copy of 0_Welcome_and_Setup.ipynb`. **Always** that folder — Colab creates it on the first save and never asks again. Opening from GitHub is irrelevant; the copy does not land near GitHub.
+- Demo `File > Locate in Drive` live. Fastest answer to the question you would otherwise field by email.
+- Tell them to **rename on save** and to make a `Drive / OPIM 5509 /` folder now. Six files called `Copy of ...` in one flat folder is unusable by week four.
+- Note that `File > Save a copy in GitHub` commits to a repo **they** own — it cannot write to yours, so nobody can break the class by clicking it. Drive is the simpler habit here.
 - Show `Runtime > Run all`. Let it churn. Point out the cell numbering `[1] [2] [3]` as it goes — that ordering **is** the mental model.
 - Demo the classic student bug live: run a cell out of order, get a `NameError`, then show restart-and-run-all as the fix. They will hit this in week 3 at 11pm.
 - Run the version cell. Tell them: if a version mismatch ever bites you, screenshot **this** cell into your office hours question.
