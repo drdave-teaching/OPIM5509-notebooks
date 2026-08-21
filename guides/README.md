@@ -18,6 +18,15 @@ Notebooks for this module: **[Module 1 →](../Module1/)**
 
 There is also an **optional appendix** with no video — [`5_Appendix_ROC_AUC_and_Thresholds.ipynb`](../Module1/5_Appendix_ROC_AUC_and_Thresholds.ipynb) — for students who want the ROC curve built from scratch rather than handed to them.
 
+## Module 2 — Dense Neural Networks *(Weeks 3–5, Fall 2026)*
+
+| Guide | Who it's for | What's in it |
+| :-- | :-- | :-- |
+| [🎙 **Talking Points**](M2_DenseNN_Talking_Points.md) | Instructor | The 18-video recording plan: running order, splits from the old 9–13 min videos, through-lines, guardrails |
+| [✅ **Skills Sheet**](M2_DenseNN_Skills.md) | Students | The checklist of what you should own before Module 3 |
+
+Notebooks for this module: **[Module 2 →](../Module2/)** — video guide follows once the new recordings are up.
+
 ---
 
 ## About the 🔴 markers

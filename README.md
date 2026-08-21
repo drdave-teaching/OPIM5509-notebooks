@@ -31,7 +31,7 @@ Six notebooks that rebuild the ML workflow every neural network in this course s
 | Module | Topic | Notebooks |
 | :-- | :-- | :-- |
 | **[1](Module1/)** | **Machine Learning Refresher** — EDA, the modeling skeleton, regression & classification | 6 |
-| [2](Module2/) | Dense Neural Networks — forward prop, backprop, hot-and-cold, structured/image/text data | 15 |
+| **[2](Module2/)** | **Dense Neural Networks** — by-hand theory, Keras regression & classification | 14 |
 | [3](Module3/) | Convolutional Neural Networks — convnets, transfer learning, autoencoders | 7 |
 | [4](Module4/) | Recurrent Neural Networks (numeric sequences) — RNN/LSTM/GRU, univariate & multivariate | 11 |
 | [5](Module5/) | Recurrent Neural Networks (text) — tokenizers, embeddings, GloVe | 6 |
