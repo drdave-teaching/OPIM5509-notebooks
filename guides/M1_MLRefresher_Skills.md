@@ -3,7 +3,7 @@
 **OPIM 5509 - Introduction to Deep Learning · Dr. Dave Wanik · University of Connecticut**
 *Fall 2026 · Week 1*
 
-After the Module 1 videos, these are the skills you own. Check yourself off — if one feels shaky, the notebook to revisit is named right there.
+After the nine Module 1 videos (51:33), these are the skills you own. Check yourself off — if one feels shaky, the video and notebook to revisit are named right there.
 
 Nothing on this list is new material. All of it is assumed from here forward.
 
@@ -18,6 +18,8 @@ Nothing on this list is new material. All of it is assumed from here forward.
 - [ ] Print the versions of numpy, pandas, matplotlib, seaborn, and scikit-learn — and know why you'd want to
 - [ ] Find `Runtime → Change runtime type` and say when in this course you will need a GPU
 - [ ] Read a `.shape` out loud and say what each number means
+- [ ] Explain why selecting a GPU in Colab is **not** enough — your code has to be written to use it
+- [ ] Find the Chollet textbook free through library.uconn.edu with your NetID
 
 ## 🔍 Exploratory data analysis
 *Notebook: `Module1/1_CaliforniaHousing_EDA.ipynb`*
@@ -33,6 +35,10 @@ Nothing on this list is new material. All of it is assumed from here forward.
 - [ ] Read a correlation heatmap, and name **multicollinearity** when two features carry the same information
 - [ ] Build histograms, boxplots, and scatterplots — every one of them titled and axis-labeled
 - [ ] Treat latitude and longitude as ordinary features and produce a map from a scatterplot
+- [ ] Say why mean and standard deviation are most meaningful for **normal** data, and reach for percentiles when the sd exceeds the mean
+- [ ] Apply the **reasonable person test** — does the story the data tells match what you'd expect of the business? If it's backwards, raise it
+- [ ] Argue *against* deleting outliers: they are often the most interesting thing in the business
+- [ ] Order bubbles largest-underneath so small ones aren't hidden
 
 ## 🏗️ The modeling skeleton
 *Notebook: `Module1/2_AllTheModels_Regression.ipynb`*
@@ -44,6 +50,8 @@ Nothing on this list is new material. All of it is assumed from here forward.
 - [ ] Explain why test values landing outside 0 to 1 after scaling is correct, not a bug
 - [ ] Fit `LinearRegression`, `DecisionTreeRegressor`, `RandomForestRegressor`, `GradientBoostingRegressor`, and `KNeighborsRegressor` using identical surrounding code
 - [ ] Write a reusable evaluation function instead of copy-pasting the metric block five times
+- [ ] **Save your feature names before scaling** — the array survives, the names don't, and you'll need them for permutation importance
+- [ ] Explain why `df` is never mutated (no `inplace=True`) and why that matters when you re-run cells
 
 ## 📏 Evaluating regression
 *Notebook: `Module1/2_AllTheModels_Regression.ipynb`*
@@ -55,6 +63,9 @@ Nothing on this list is new material. All of it is assumed from here forward.
 - [ ] Build a predicted-vs-actual plot with a 45° reference line and read its patterns
 - [ ] Connect a pattern in the residuals back to something you found during EDA
 - [ ] Rank features with built-in tree importance **and** `permutation_importance`, and say why the second is more trustworthy
+- [ ] Explain **why random forests do so well on tabular data** — many small trees on random subsets of rows and columns, averaged into a stable estimate
+- [ ] Say where a neural network wins instead (unstructured data — it does the feature engineering for you)
+- [ ] Name the dial that stops a decision tree overfitting (`min_samples_leaf` / `min_samples_split`)
 
 ## 🎯 Evaluating classification
 *Notebook: `Module1/3_AllTheModels_Classification.ipynb`*
@@ -68,6 +79,9 @@ Nothing on this list is new material. All of it is assumed from here forward.
 - [ ] Get raw probabilities from `predict_proba()` and show that `predict()` is just a threshold at 0.5
 - [ ] Move the threshold and describe how precision and recall trade against each other
 - [ ] Interpret an **AUC** and explain why it is threshold-free
+- [ ] Read a `predict_proba` score as model **confidence** — 0.99 is confident, 0.53 is not
+- [ ] Say why the raw house value had to be dropped from `X`, not just the flag
+- [ ] Give a real situation where a "chatty" model with false alarms is the *right* call
 
 ## 📈 Optional — ROC, AUC, and thresholds
 *Notebook: `Module1/5_Appendix_ROC_AUC_and_Thresholds.ipynb` (no video)*
