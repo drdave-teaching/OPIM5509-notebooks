@@ -27,6 +27,8 @@ Eighteen 🔴 markers across ten notebooks. Full talking points sit inside each 
 | **M2.3 — Classification** | | | |
 | 12 | Titanic prep + the 61.7% baseline | `0_BinaryClassification_Titanic...` | Titanic Pt 1 |
 | 13 | Sigmoid, binary_crossentropy, confusion matrix | same (cell 22) | Titanic Pt 2 (13:15 — trim) |
+| 13b | Train/val/test done right: three piles, three jobs | `0b_BinaryClassification_Titanic_TrainValTest...` | NEW Fall 2026 — no old video |
+| 13c | K-fold: stop trusting a single split | `0c_BinaryClassification_Titanic_KFold...` | NEW Fall 2026 — no old video |
 | 14 | Iris: three classes, softmax | `1_MulticlassClassification_Iris...` | Iris Pt 1 |
 | 15 | Iris: fit + honest evaluation | same (cell 19) | Iris Pt 2 |
 | 16 | MNIST with a dense net | `2_A_FirstLook_atNN_with_MNIST...` | DNNs for MNIST (11:00 — split at Evaluate if long) |
