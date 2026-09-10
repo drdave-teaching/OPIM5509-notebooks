@@ -63,7 +63,8 @@ Fifteen videos across nine notebooks (🔴 markers placed after the Keras-3 exec
 - **Chronological splits, no shuffle** — say why (future leakage) in videos 1, 6, 8.
 - The LSTM hand math assumes `reset_after=False` for GRU parity; Keras' GRU default differs — say it, don't let the summary contradict you.
 - Persistence looks great on a plot — always pair the plot with the metric (video 7).
-- Numbers above are the **2022 runs**; unseeded Keras will drift a little — quote the Keras-3 rerun numbers in the markers.
+- Numbers above are the **2022 runs**. The notebooks are now **seeded (5509)** and ship with the stored Keras-3 outputs — **quote the numbers on screen**, not these. On a T4 a recurrent kernel can drift a hair from the stored CPU numbers; say "within a few hundredths" rather than a false-precision match.
+- **Say the reproducibility beat out loud once per notebook:** seed at the top, and the closing "Save the model and use it again" cell — save to `.keras`, `load_model`, identical predictions. Students will reuse saved models in the final project; this is where they learn it.
 
 ## Recording checklist
 
