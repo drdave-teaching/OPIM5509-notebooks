@@ -3,11 +3,11 @@
 **OPIM 5509 - Introduction to Deep Learning · Dr. Dave Wanik · University of Connecticut**
 *Fall 2026 · recording notes — read before you hit record*
 
-Seventeen videos across ten notebooks (🔴 markers placed after the Keras-3 execution audit; full talking points live inside each marker's HTML comment — double-click the red dot while recording). This file is the running order and the per-video one-liner.
+Nineteen videos across twelve notebooks (🔴 markers placed after the Keras-3 execution audit; full talking points live inside each marker's HTML comment — double-click the red dot while recording). This file is the running order and the per-video one-liner.
 
 **Target: ≤8 minutes per video.** The 2022 M4 videos ran 4:30–10:06; the two long ones (LSTM-by-hand 10:06, many-to-many 8:05) are split below. Same pattern as M2/M3: motivate with the example, then work the concrete case, then the number.
 
-**Split (mirrors the 2022 module):** M4.1 = theory + by hand + univariate (videos 1–7); M4.2 = multivariate + stock (8–11); M4.3 = advanced + the demand capstone (12–17).
+**Split (mirrors the 2022 module):** M4.1 = theory + by hand + univariate (videos 1–7); M4.2 = multivariate + stock (8–11); M4.3 = advanced + the demand capstone (12–19).
 
 ## Running order
 
@@ -33,6 +33,8 @@ Seventeen videos across ten notebooks (🔴 markers placed after the Keras-3 exe
 | 15 | Many-to-many: two targets at once, then multi-step ahead | `a_Many_To_Many_BDL_tmpf_and_vsby` + `b_..._tmpfPlus1` | `1_hru76zg7` 8:05 |
 | 16 | Forecasting electricity demand, Pt 1: data, baselines, a univariate LSTM | `Forecasting_Electricity_Demand_RNN` | NEW (Fall 2026) |
 | 17 | Forecasting electricity demand, Pt 2: add the weather, 24 hours ahead, call the peak | `Forecasting_Electricity_Demand_RNN` | NEW (Fall 2026) |
+| 18 | Tomorrow, three ways: recursive vs direct vs multi-output, and where future covariates come from | `Multi_Step_Forecasting_Strategies` | NEW (Fall 2026) |
+| 19 | What is the LSTM looking at? xAI for sequences | `Explaining_an_LSTM` | NEW (Fall 2026) |
 
 ## Per-video one-liners (with the anchor numbers from the 2022 runs — re-verify on the Keras 3 run before you say them)
 
@@ -54,6 +56,9 @@ Seventeen videos across ten notebooks (🔴 markers placed after the Keras-3 exe
 
 16. **Demand Pt 1.** You are the utility; forecast tomorrow's hourly load - the Assignment 2 data as a sequence. The file is **unsorted** (show it). EDA beats: a July week, hour-of-day and month profiles, the demand-vs-temperature U, the 2020 COVID dip. Train 2017-18, test 2019, no shuffle. **Baselines first:** mean-only 554 MW, same-hour-yesterday 227, last-hour persistence 129 - read them off the table on screen. Univariate LSTM, look-back 24, scaled on train only: **~44 MW**, three times better than persistence, because two years of history taught it the daily shape.
 17. **Demand Pt 2.** Add temperature, dew point, humidity and the **clock as sin/cos**; Demand last. Demand's own past stays in the inputs (that's the fix students always miss). Weather + clock: ~44 -> **~34 MW** at one hour ahead - helps, but the last hour already carries most of it. Then the real job: past week -> next 24 hours, `Dense(24)`, and the **MAE-by-horizon** plot against seasonal-naive (~167 vs 227 averaged over the day). Peak-hour classifier: top-10% hours, majority baseline 91.5%, so read precision/recall (~0.91 / ~0.88). Close on the seed + save/reload.
+
+18. **Three ways to tomorrow.** Start from the one-step LSTM. **Recursive:** predict hour 1, write it into the demand column, slide, predict hour 2 - draw the window sliding. The trap is in the *columns*: clock is known (free), weather is NOT (a forecast - we cheat with actuals and label it perfect foresight, then freeze the weather for the honest curve), and past demand becomes your own guesses - **exposure bias**, errors compound. **Direct:** one model per horizon, nothing fed back (we train 1/6/12/24). **Multi-output:** `Dense(24)`, the capstone. Numbers to say (MAE at h=1/6/12/24): recursive-frozen 33/168/265/**414**, recursive-perfect-weather 33/159/236/331, direct 42/142/178/207, multi-output 87/139/171/206, seasonal naive ~227 flat. Recursive wins hour 1 and loses to *naive* from hour 8; direct and multi-output tie by hour 24. Say what you'd ship (direct or multi-output with forecast weather). Mention seq2seq + teacher forcing as the Module 5 bridge.
+19. **Explaining the LSTM.** Against 5512's SHAP/LIME bars: the input is 24 x 8, so the explanation is a **heatmap**. Permutation by feature (demand's own past >> the clock >> weather - exactly what persistence told you). Occlusion by hour (hour -1 dominates, hour -24 pops - the daily rhythm). Gradient saliency via `tf.GradientTape` - the training derivative pointed at the inputs. Integrated gradients: attributions that **add up** (completeness check ~0). What-if +10 F by month: the U, recovered from the model. SHAP: `GradientExplainer` works on the LSTM and agrees with integrated gradients - show the two heatmaps side by side; `DeepExplainer` doesn't (Keras 3), and SHAP wants NumPy < 2.3 - one sentence, move on. Attention = free explanations, Module 5.
 
 ## The through-lines to keep hitting
 

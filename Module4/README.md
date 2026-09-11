@@ -9,7 +9,7 @@ Everything so far had no order — shuffle the rows and nothing changes. A time 
 ```
   M4.1  Theory, by hand, univariate   window method → SimpleRNN → params (G·[H(H+I)+H]) → LSTM/GRU → temperature series
   M4.2  Multivariate, stock                occupancy → stock returns (honest)
-  M4.3  Advanced + the capstone          Conv1D → dropout/stacking/bidirectional → ConvLSTM → many-to-many → electricity demand
+  M4.3  Advanced + the capstone          Conv1D → dropout/stacking/bidirectional → ConvLSTM → many-to-many → electricity demand → multi-step strategies → explaining the model
 ```
 
 ## M4.1 — Theory, by hand, univariate
@@ -38,6 +38,8 @@ Everything so far had no order — shuffle the rows and nothing changes. A time 
 | 9 | **Many-to-Many (a): two targets** | Predict dew point *and* pressure at once — targets last, `Dense(2, linear)`, one model borrowing strength across both | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/a_Many_To_Many_BDL_tmpf_and_vsby.ipynb) |
 | — | *Many-to-Many (b): multi-step* | Forecast the next 3 hours — and watch quality fade with the horizon | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/b_Many_To_Many_BDL_tmpf_and_tmpfPlus1.ipynb) |
 | 10 | **Forecasting Electricity Demand — RNN** | The Assignment 2 data as a *sequence*: sort it, baselines (mean / same-hour-yesterday / persistence), a univariate LSTM, then weather + clock features, a **24-hour-ahead** multi-step forecast, and a peak-hour classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Forecasting_Electricity_Demand_RNN.ipynb) |
+| 11 | **Tomorrow, Three Ways** | Recursive (feed your own prediction back in) vs direct (a model per horizon) vs multi-output — error by horizon for each, and where the *future* covariates come from (calendar: known; weather: a forecast; past demand: your own guesses) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Multi_Step_Forecasting_Strategies.ipynb) |
+| 12 | **Explaining an LSTM** | xAI for sequences: permutation importance, occlusion by hour, gradient saliency, integrated gradients (with the completeness check), a +10 °F what-if, and SHAP `GradientExplainer` for comparison — the explanation is a *heatmap*, hours × features | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Explaining_an_LSTM.ipynb) |
 | ✍ | **Assignment 5 (RNN Math)** | Parameter counts and output shapes for recurrent, Conv1D and bidirectional layers, by hand | *(HuskyCT)* |
 
 **Data** loads from stable links in [`OPIM5509Files/OPIM5509_Module4_Files/data`](https://github.com/drdave-teaching/OPIM5509Files/tree/main/OPIM5509_Module4_Files/data): `daily-min-temperatures.csv` (Melbourne/Sydney daily minimums, 10 years), `datatraining.txt` + `datatest2.txt` (UCI room-occupancy sensors, two weeks at 1-minute cadence), `cleanBDL.csv` (Bradley airport weather), `BDL_cleanweather_energy.csv` (hourly Connecticut demand + Bradley weather, 2011–2021 — the Assignment 2 data), and `stock_adjclose_2017_2020.csv` — a snapshot of 11 tickers' adjusted closes replacing the live scrape the old notebook used.
@@ -46,12 +48,12 @@ Everything so far had no order — shuffle the rows and nothing changes. A time 
 
 | Guide | Use it for |
 | :-- | :-- |
-| [🎙 Talking Points](../guides/M4_RNN_Talking_Points.md) | Instructor — the 17-video recording plan with running order and anchor numbers |
+| [🎙 Talking Points](../guides/M4_RNN_Talking_Points.md) | Instructor — the 19-video recording plan with running order and anchor numbers |
 | [✅ Skills Sheet](../guides/M4_RNN_Skills.md) | The checklist of what you should own before Module 5 |
 
 ## Keras 3 / pandas 3 audit (Fall 2026)
 
-All twelve notebooks were executed top-to-bottom on TensorFlow 2.21 / Keras 3 before this module was recorded. What changed:
+All fourteen notebooks were executed top-to-bottom on TensorFlow 2.21 / Keras 3 before this module was recorded. What changed:
 
 - **Stock notebook rebuilt around a stable CSV.** The original pulled prices live through the `yahoo_fin` scraper, which no longer returns data (Yahoo changed). Prices now load from `stock_adjclose_2017_2020.csv` in the course repo — same 11 tickers and dates — with a commented `yfinance` cell for anyone who wants fresh data. Its import block also dropped the dead Keras-2 paths (`keras.preprocessing.text`, `keras.utils.np_utils`, `keras.layers.convolutional`) and the unused text-model imports.
 - **`fillna(method='ffill')` → `.ffill()`** in the multi-step many-to-many notebook (pandas 3 removed the `method=` argument), and **`df.drop(axis=1, columns=[...])` → `df.drop(columns=[...])`** in both many-to-many notebooks (pandas 3 rejects passing `axis` together with `columns`).
@@ -61,4 +63,5 @@ All twelve notebooks were executed top-to-bottom on TensorFlow 2.21 / Keras 3 be
 - **Every fitting notebook ends with "Save the model and use it again":** the final model is saved to a single `.keras` file, reloaded with `load_model`, and checked to give identical predictions — reproducibility is a seed *and* a saved artifact.
 - **Occupancy data upgraded.** The three occupancy notebooks used the 2-day `datatest.txt` slice (2,665 rows — the 50/50 split trained on about a day). They now stack the real UCI training and test files into one two-week series (17,895 rows) and keep the chronological split. With 7× the rows, the fits use `batch_size=64` instead of 5–10 so each epoch stays seconds long on CPU/Colab (early stopping is unchanged).
 - **New capstone notebook:** `Forecasting_Electricity_Demand_RNN.ipynb` — the Assignment 2 demand data treated as a sequence, with a business framing (you're the utility) and the baselines that make an RNN forecast honest.
+- **Two more M4.3 notebooks (videos 18–19):** `Multi_Step_Forecasting_Strategies` (recursive vs direct vs multi-output, exposure bias, future covariates) and `Explaining_an_LSTM` (permutation, occlusion, saliency, integrated gradients, what-if, and SHAP's `GradientExplainer` compared against integrated gradients). SHAP notes: `DeepExplainer` does not work on Keras 3, and SHAP needs NumPy < 2.3 (Colab is fine; a fresh local TensorFlow install may need `pip install "numpy<2.3" shap`).
 - The red `input_shape` UserWarning Keras 3 prints on the first model cell is harmless — same as Modules 2–3.

@@ -36,6 +36,10 @@
 - [ ] Build a **24-hour-ahead** model (`Dense(24)`) and read an **MAE-by-horizon** plot against the seasonal-naive baseline
 - [ ] Frame a **peak-hour** flag as imbalanced classification and judge it by precision/recall, not accuracy
 - [ ] Save a trained model to a `.keras` file, reload it, and prove the predictions are identical (seed + saved artifact = reproducibility)
+- [ ] Name the three multi-step strategies — **recursive** (autoregressive), **direct**, **multi-output** — and explain exposure bias: a model trained on true history but run on its own predictions
+- [ ] Classify a covariate at a future hour as *known* (calendar), *forecastable* (weather → use the forecast, inherit its error) or *the target itself* (only real history, or your own predictions) and choose the strategy accordingly
+- [ ] Explain a sequence model with **permutation importance**, **occlusion by time step**, **gradient saliency** (`tf.GradientTape`) and **integrated gradients**, read the hours × features heatmap, and verify the completeness check
+- [ ] Run a **what-if** (counterfactual) through a trained LSTM and interpret the response — and know which SHAP explainer works on a Keras 3 RNN (`GradientExplainer`, not `DeepExplainer`)
 
 ## Assessed by
 
