@@ -39,6 +39,8 @@
 - [ ] Name the three multi-step strategies — **recursive** (autoregressive), **direct**, **multi-output** — and explain exposure bias: a model trained on true history but run on its own predictions
 - [ ] Classify a covariate at a future hour as *known* (calendar), *forecastable* (weather → use the forecast, inherit its error) or *the target itself* (only real history, or your own predictions) and choose the strategy accordingly
 - [ ] Explain a sequence model with **permutation importance**, **occlusion by time step**, **gradient saliency** (`tf.GradientTape`) and **integrated gradients**, read the hours × features heatmap, and verify the completeness check
+- [ ] **Reload a saved model in a fresh session** (download the `.keras`, rebuild the prep *and the scaler*, prove the predictions match) and score it on data it never saw
+- [ ] Recognize **distribution shift** in a by-month error plot and explain why a model trained on normal years fails on an abnormal one
 - [ ] Run a **what-if** (counterfactual) through a trained LSTM and interpret the response — and know which SHAP explainer works on a Keras 3 RNN (`GradientExplainer`, not `DeepExplainer`)
 
 ## Assessed by

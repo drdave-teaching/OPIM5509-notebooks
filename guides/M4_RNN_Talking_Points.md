@@ -3,7 +3,7 @@
 **OPIM 5509 - Introduction to Deep Learning · Dr. Dave Wanik · University of Connecticut**
 *Fall 2026 · recording notes — read before you hit record*
 
-Nineteen videos across twelve notebooks (🔴 markers placed after the Keras-3 execution audit; full talking points live inside each marker's HTML comment — double-click the red dot while recording). This file is the running order and the per-video one-liner.
+Twenty-two videos across fifteen notebooks (🔴 markers placed after the Keras-3 execution audit; full talking points live inside each marker's HTML comment — double-click the red dot while recording). This file is the running order and the per-video one-liner.
 
 **Target: ≤8 minutes per video.** The 2022 M4 videos ran 4:30–10:06; the two long ones (LSTM-by-hand 10:06, many-to-many 8:05) are split below. Same pattern as M2/M3: motivate with the example, then work the concrete case, then the number.
 
@@ -21,10 +21,12 @@ Nineteen videos across twelve notebooks (🔴 markers placed after the Keras-3 e
 | 5 | GRU by hand, and stacking/mixing cells | `RNNs_By_Hand_basic` (GRU + Advanced) | `1_wb9uz377` second half |
 | 6 | Univariate RNN Pt 1: the 3-D tensor and `split_sequence` | `Univariate_Temperature_RNN` | `1_4awr1wvf` 7:51 |
 | 7 | Univariate RNN Pt 2: fit SimpleRNN, then LSTM, then beat the baselines | `Univariate_Temperature_RNN` | `1_qjmddsos` 7:00 + `1_f4bzdd6i` 5:22 (trim to one) |
+| 7b | Univariate RNN Pt 2b: reload the saved LSTM, explain it, roll it forward | `Univariate_Temperature_RNN_pt2` | NEW (Fall 2026) |
 | **M4.2 — Multivariate, stock** | | | |
 | 8 | Multivariate window method: room occupancy | `Multivariate_Occupancy_Lags` | `1_0q71m2q6` 7:36 |
 | 9 | Multivariate RNN Pt 1: `split_sequences`, column order, the classification head | `Multivariate_Occupancy_RNN` | `1_k20syja5` 7:00 |
 | 10 | Multivariate RNN Pt 2: LSTM swap, stacking, persistence baseline | `Multivariate_Occupancy_RNN` | `1_jbfi30un` 5:12 |
+| 10b | Multivariate RNN Pt 2b: reload the classifier, score two unseen days, explain it | `Multivariate_Occupancy_RNN_pt2` | NEW (Fall 2026) |
 | 11 | Predict the stock market (an honest result) | `Simple_Predict_The_Stock_Market_DL` | `1_r89vibek` 7:50 |
 | **M4.3 — Advanced + the capstone** | | | |
 | 12 | Conv1D + MaxPooling1D on a sequence, by hand | `Advanced_RNN_Theory` | `1_w7pmbgt1` 5:24 |
@@ -33,6 +35,7 @@ Nineteen videos across twelve notebooks (🔴 markers placed after the Keras-3 e
 | 15 | Many-to-many: two targets at once, then multi-step ahead | `a_Many_To_Many_BDL_tmpf_and_vsby` + `b_..._tmpfPlus1` | `1_hru76zg7` 8:05 |
 | 16 | Forecasting electricity demand, Pt 1: data, baselines, a univariate LSTM | `Forecasting_Electricity_Demand_RNN` | NEW (Fall 2026) |
 | 17 | Forecasting electricity demand, Pt 2: add the weather, 24 hours ahead, call the peak | `Forecasting_Electricity_Demand_RNN` | NEW (Fall 2026) |
+| 17b | Demand Pt 2b: reload, forecast 2020, watch the distribution shift | `Forecasting_Electricity_Demand_RNN_pt2` | NEW (Fall 2026) |
 | 18 | Tomorrow, three ways: recursive vs direct vs multi-output, and where future covariates come from | `Multi_Step_Forecasting_Strategies` | NEW (Fall 2026) |
 | 19 | What is the LSTM looking at? xAI for sequences | `Explaining_an_LSTM` | NEW (Fall 2026) |
 
@@ -59,6 +62,9 @@ Nineteen videos across twelve notebooks (🔴 markers placed after the Keras-3 e
 
 18. **Three ways to tomorrow.** Start from the one-step LSTM. **Recursive:** predict hour 1, write it into the demand column, slide, predict hour 2 - draw the window sliding. The trap is in the *columns*: clock is known (free), weather is NOT (a forecast - we cheat with actuals and label it perfect foresight, then freeze the weather for the honest curve), and past demand becomes your own guesses - **exposure bias**, errors compound. **Direct:** one model per horizon, nothing fed back (we train 1/6/12/24). **Multi-output:** `Dense(24)`, the capstone. Numbers to say (MAE at h=1/6/12/24): recursive-frozen 33/168/265/**414**, recursive-perfect-weather 33/159/236/331, direct 42/142/178/207, multi-output 87/139/171/206, seasonal naive ~227 flat. Recursive wins hour 1 and loses to *naive* from hour 8; direct and multi-output tie by hour 24. Say what you'd ship (direct or multi-output with forecast weather). Mention seq2seq + teacher forcing as the Module 5 bridge.
 19. **Explaining the LSTM.** Against 5512's SHAP/LIME bars: the input is 24 x 8, so the explanation is a **heatmap**. Permutation by feature (demand's own past ~690 MW >> hour sin/cos ~80 >> weather ~10 - exactly what persistence told you). Occlusion by hour (hour -1 costs ~800 MW when blanked, the effect is gone by hour -9, and hour -24 does *nothing* - the model reads the daily rhythm off the clock features, not the window). Gradient saliency via `tf.GradientTape` - the training derivative pointed at the inputs. Integrated gradients: attributions that **add up** (completeness check ~0). What-if +10 F by month: the U, recovered from the model. SHAP: `GradientExplainer` works on the LSTM and agrees with integrated gradients - show the two heatmaps side by side; `DeepExplainer` doesn't (Keras 3), and SHAP wants NumPy < 2.3 - one sentence, move on. Attention = free explanations, Module 5.
+
+
+**Part 2b videos (reload → unseen data → explain → roll forward).** Same recipe each time, and say so - it's the professional loop. **7b:** download the .keras, rebuild the windows, MAE matches Part 1; occlusion and saliency by lag (yesterday dominates, fades over a week); roll forward 14 days: 1.78 C on day 1, settles at ~2.25 and stays there, still beating persistence (2.75) and climatology (3.2) - recursive behaves on a mean-reverting series with no covariates; the energy notebooks show where it doesn't. **10b:** the third UCI file is two days the model never saw; confusion matrix vs persistence; 97.4% on the unseen days, persistence still 0.99; permutation by sensor - it's a *light detector*, ask whether that's a feature or a shortcut; +200 lux moves P(occupied) by 0.15, +300 ppm CO₂ by 0.01. **17b:** two artifacts (day-ahead + one-hour) and the *scaler*; 2019 reproduces (~167 MW); 2020 month by month (year MAE 167 -> 181; April-May worse where 2019 got better, August 288 vs 214) - distribution shift you can point at; recursive vs multi-output on the unseen year, same shape as 2019; permutation says demand's past > clock > weather. Close each one with: interpretability is not a separate topic, it's the last cell of every model.
 
 ## The through-lines to keep hitting
 
