@@ -1,0 +1,16 @@
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjExOCIgdmlld0JveD0iMCAwIDEwMDAgMTE4IiByb2xlPSJpbWciPgo8dGl0bGU+T1BJTSA1NTA5IGNvdXJzZSBiYW5uZXI8L3RpdGxlPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMTgiIHJ4PSIxMiIgZmlsbD0iI0YyQjcwNSIvPgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iOSIgaGVpZ2h0PSIxMTgiIHJ4PSI0LjUiIGZpbGw9IiNDOTkzMDAiLz4KPHRleHQgeD0iODQ4IiB5PSI5NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iODYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNGNkM5MzciIG9wYWNpdHk9IjAuNTUiPjU1MDk8L3RleHQ+Cjx0ZXh0IHg9IjQwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMzRDJFMDAiPk9QSU0gNTUwOTwvdGV4dD4KPHRleHQgeD0iNDIiIHk9Ijc4IiBmb250LWZhbWlseT0iQXJpYWwsIEhlbHZldGljYSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzVDNDcwMCI+SW50cm9kdWN0aW9uIHRvIERlZXAgTGVhcm5pbmc8L3RleHQ+Cjx0ZXh0IHg9IjQyIiB5PSIxMDMiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjM0QyRTAwIj5Eci4gRGF2ZSBXYW5pazwvdGV4dD4KPHRleHQgeD0iMTU4IiB5PSIxMDMiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNDAwIiBmaWxsPSIjNUM0NzAwIj7CtyBVbml2ZXJzaXR5IG9mIENvbm5lY3RpY3V0PC90ZXh0Pgo8L3N2Zz4K" width="100%" alt="OPIM 5509 banner"/>
+
+# Module 4 — energy track (Option B, side-by-side proposal)
+
+**Status: proposal, not wired into the module.** This folder re-anchors the M4.2/M4.3 arc on one dataset — the hourly Connecticut demand + Bradley weather series students already met in Assignment 2 — instead of hopping across room occupancy, `cleanBDL` dew point/pressure and the temperature series. Same teaching beats, same cell order, a regression target you can read in megawatts. The stock notebook (the "don't trade on it" lesson) stays as is either way.
+
+| Track video | Replaces | Notebook | The beats |
+| :-- | :-- | :-- | :-- |
+| 8B | 8 · occupancy window method | `E1_Multivariate_Demand_Lags` | lag table for target + covariates, two dense nets (demand lags vs + weather), the two honest plots |
+| 9B–10B | 9–10 · occupancy RNN Pt 1/2 | `E2_Multivariate_Demand_RNN` | `split_sequences`, target last, SimpleRNN → LSTM swap → stacked, bake-off vs baselines, peak-hour sigmoid head |
+| 14B | 14 · ConvLSTM on temperature/occupancy | `E3_Advanced_Demand_RNN` | Conv1D + MaxPooling1D → LSTM, recurrent dropout, stacking, Bidirectional, bake-off |
+| 15B | 15 · many-to-many (a) + (b) | `E4_Many_To_Many_Demand` | two targets (demand + temperature), then past week → next 24 hours with MAE-by-horizon |
+
+**If Option B is adopted:** the capstone `Forecasting_Electricity_Demand_RNN` (videos 16–17) becomes the M4.3 *wrap-up* rather than a new dataset — its baselines/EDA half can shrink because students have seen the data since video 8. **If Option A stays:** delete this folder; nothing else references it.
+
+All four notebooks: seeded (`keras.utils.set_random_seed(5509)`), train 2018 / test 2019 chronological, scale on train only, end with save → `load_model` → identical-predictions check. Executed top-to-bottom on TF 2.21 / Keras 3 (stored outputs).
