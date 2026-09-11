@@ -8,7 +8,8 @@ Everything so far had no order — shuffle the rows and nothing changes. A time 
 
 ```
   M4.1  Theory, by hand, univariate   window method → SimpleRNN → params (G·[H(H+I)+H]) → LSTM/GRU → temperature series
-  M4.2  Multivariate, stock, advanced  occupancy → stock returns (honest) → Conv1D → dropout/stacking/bidirectional → ConvLSTM → many-to-many
+  M4.2  Multivariate, stock                occupancy → stock returns (honest)
+  M4.3  Advanced + the capstone          Conv1D → dropout/stacking/bidirectional → ConvLSTM → many-to-many → electricity demand
 ```
 
 ## M4.1 — Theory, by hand, univariate
@@ -19,37 +20,45 @@ Everything so far had no order — shuffle the rows and nothing changes. A time 
 | 2 | **RNNs By Hand** | SimpleRNN → LSTM → GRU with a pencil: the hidden-state handoff, `output = units`, and one parameter formula for every cell | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/RNNs_By_Hand_basic.ipynb) |
 | 3 | **Univariate Temperature — RNN** | `split_sequence` → the 3-D tensor `(samples, look-back, 1)` → SimpleRNN, then LSTM, then beat mean-only and persistence | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Univariate_Temperature_RNN.ipynb) |
 
-## M4.2 — Multivariate, stock, advanced
+## M4.2 — Multivariate, stock
 
 | # | Notebook | What you'll do | Open |
 | :-- | :-- | :-- | :-- |
 | 4 | **Multivariate Occupancy — Lags** | Window method with covariates (HVAC sensors → occupied?), lagged features without leaking the target | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Multivariate_Occupancy_Lags.ipynb) |
 | 5 | **Multivariate Occupancy — RNN** | `split_sequences` with the target last, a sigmoid head, the LSTM swap, stacking with `return_sequences`, the persistence baseline | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Multivariate_Occupancy_RNN.ipynb) |
 | 6 | **Predict the Stock Market (simple)** | Returns of 11 tickers → will Walmart rise tomorrow? Stacked LSTMs, and an honest near-50% answer: *don't trade on it* | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Simple_Predict_The_Stock_Market_DL.ipynb) |
+
+## M4.3 — Advanced + the capstone
+
+| # | Notebook | What you'll do | Open |
+| :-- | :-- | :-- | :-- |
 | 7 | **Advanced RNN Theory** | `Conv1D` + `MaxPooling1D` by hand, recurrent dropout, stacking, `Bidirectional` — and two "monster" architectures to read off `summary()` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Advanced_RNN_Theory.ipynb) |
 | 8 | **Univariate Temperature — Advanced** | ConvLSTM on the temperature series: conv + pooling in front of the recurrent layer | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Univariate_Temperature_RNN_Advanced.ipynb) |
 | — | *Multivariate Occupancy — Advanced Topics* | The same upgrades on the occupancy series — reference, no separate video | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Multivariate_Occupancy_RNN_AdvancedTopics.ipynb) |
 | 9 | **Many-to-Many (a): two targets** | Predict dew point *and* pressure at once — targets last, `Dense(2, linear)`, one model borrowing strength across both | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/a_Many_To_Many_BDL_tmpf_and_vsby.ipynb) |
 | — | *Many-to-Many (b): multi-step* | Forecast the next 3 hours — and watch quality fade with the horizon | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/b_Many_To_Many_BDL_tmpf_and_tmpfPlus1.ipynb) |
+| 10 | **Forecasting Electricity Demand — RNN** | The Assignment 2 data as a *sequence*: sort it, baselines (mean / same-hour-yesterday / persistence), a univariate LSTM, then weather + clock features, a **24-hour-ahead** multi-step forecast, and a peak-hour classifier | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Forecasting_Electricity_Demand_RNN.ipynb) |
 | ✍ | **Assignment 5 (RNN Math)** | Parameter counts and output shapes for recurrent, Conv1D and bidirectional layers, by hand | *(HuskyCT)* |
 
-**Data** loads from stable links in [`OPIM5509Files/OPIM5509_Module4_Files/data`](https://github.com/drdave-teaching/OPIM5509Files/tree/main/OPIM5509_Module4_Files/data): `daily-min-temperatures.csv` (Melbourne/Sydney daily minimums, 10 years), `datatest.txt` (room-occupancy sensors), `cleanBDL.csv` (Bradley airport weather), and `stock_adjclose_2017_2020.csv` — a snapshot of 11 tickers' adjusted closes replacing the live scrape the old notebook used.
+**Data** loads from stable links in [`OPIM5509Files/OPIM5509_Module4_Files/data`](https://github.com/drdave-teaching/OPIM5509Files/tree/main/OPIM5509_Module4_Files/data): `daily-min-temperatures.csv` (Melbourne/Sydney daily minimums, 10 years), `datatraining.txt` + `datatest2.txt` (UCI room-occupancy sensors, two weeks at 1-minute cadence), `cleanBDL.csv` (Bradley airport weather), `BDL_cleanweather_energy.csv` (hourly Connecticut demand + Bradley weather, 2011–2021 — the Assignment 2 data), and `stock_adjclose_2017_2020.csv` — a snapshot of 11 tickers' adjusted closes replacing the live scrape the old notebook used.
 
 ## Guides
 
 | Guide | Use it for |
 | :-- | :-- |
-| [🎙 Talking Points](../guides/M4_RNN_Talking_Points.md) | Instructor — the 15-video recording plan with running order and anchor numbers |
+| [🎙 Talking Points](../guides/M4_RNN_Talking_Points.md) | Instructor — the 17-video recording plan with running order and anchor numbers |
 | [✅ Skills Sheet](../guides/M4_RNN_Skills.md) | The checklist of what you should own before Module 5 |
 
 ## Keras 3 / pandas 3 audit (Fall 2026)
 
-All eleven notebooks were executed top-to-bottom on TensorFlow 2.21 / Keras 3 before this module was recorded. What changed:
+All twelve notebooks were executed top-to-bottom on TensorFlow 2.21 / Keras 3 before this module was recorded. What changed:
 
 - **Stock notebook rebuilt around a stable CSV.** The original pulled prices live through the `yahoo_fin` scraper, which no longer returns data (Yahoo changed). Prices now load from `stock_adjclose_2017_2020.csv` in the course repo — same 11 tickers and dates — with a commented `yfinance` cell for anyone who wants fresh data. Its import block also dropped the dead Keras-2 paths (`keras.preprocessing.text`, `keras.utils.np_utils`, `keras.layers.convolutional`) and the unused text-model imports.
 - **`fillna(method='ffill')` → `.ffill()`** in the multi-step many-to-many notebook (pandas 3 removed the `method=` argument), and **`df.drop(axis=1, columns=[...])` → `df.drop(columns=[...])`** in both many-to-many notebooks (pandas 3 rejects passing `axis` together with `columns`).
 - **Two content fixes:** the multivariate RNN notebook titled itself "Ozone" (it's the occupancy data), and the advanced-topics notebook said "conv2d" where the layer is — and must be — `Conv1D`.
 - **Colab badges** re-pointed from the old OPIM5509Files path to this repo, and **15 🔴 recording markers** added (a bare red dot; talking points live in the cell's HTML comment).
-- **Every notebook is now seeded** (`keras.utils.set_random_seed(5509)` right after the imports — none of the eleven had a seed before), so your run reproduces the stored outputs exactly on CPU; a Colab GPU can drift by a little because some cuDNN recurrent kernels are non-deterministic, and that's fine.
+- **Every notebook is now seeded** (`keras.utils.set_random_seed(5509)` right after the imports — none of the original eleven had a seed before), so your run reproduces the stored outputs exactly on CPU; a Colab GPU can drift by a little because some cuDNN recurrent kernels are non-deterministic, and that's fine.
 - **Every fitting notebook ends with "Save the model and use it again":** the final model is saved to a single `.keras` file, reloaded with `load_model`, and checked to give identical predictions — reproducibility is a seed *and* a saved artifact.
+- **Occupancy data upgraded.** The three occupancy notebooks used the 2-day `datatest.txt` slice (2,665 rows — the 50/50 split trained on about a day). They now stack the real UCI training and test files into one two-week series (17,895 rows) and keep the chronological split. With 7× the rows, the fits use `batch_size=64` instead of 5–10 so each epoch stays seconds long on CPU/Colab (early stopping is unchanged).
+- **New capstone notebook:** `Forecasting_Electricity_Demand_RNN.ipynb` — the Assignment 2 demand data treated as a sequence, with a business framing (you're the utility) and the baselines that make an RNN forecast honest.
 - The red `input_shape` UserWarning Keras 3 prints on the first model cell is harmless — same as Modules 2–3.

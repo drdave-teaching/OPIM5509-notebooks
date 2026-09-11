@@ -3,11 +3,11 @@
 **OPIM 5509 - Introduction to Deep Learning · Dr. Dave Wanik · University of Connecticut**
 *Fall 2026 · recording notes — read before you hit record*
 
-Fifteen videos across nine notebooks (🔴 markers placed after the Keras-3 execution audit; full talking points live inside each marker's HTML comment — double-click the red dot while recording). This file is the running order and the per-video one-liner.
+Seventeen videos across ten notebooks (🔴 markers placed after the Keras-3 execution audit; full talking points live inside each marker's HTML comment — double-click the red dot while recording). This file is the running order and the per-video one-liner.
 
 **Target: ≤8 minutes per video.** The 2022 M4 videos ran 4:30–10:06; the two long ones (LSTM-by-hand 10:06, many-to-many 8:05) are split below. Same pattern as M2/M3: motivate with the example, then work the concrete case, then the number.
 
-**Proposed split (confirm against the HuskyCT M4 folders):** M4.1 = theory + by hand + univariate (videos 1–7); M4.2 = multivariate + stock + advanced (8–15). If HuskyCT has an M4.3 "advanced topics" folder, videos 12–15 slide into it.
+**Split (mirrors the 2022 module):** M4.1 = theory + by hand + univariate (videos 1–7); M4.2 = multivariate + stock (8–11); M4.3 = advanced + the demand capstone (12–17).
 
 ## Running order
 
@@ -21,15 +21,18 @@ Fifteen videos across nine notebooks (🔴 markers placed after the Keras-3 exec
 | 5 | GRU by hand, and stacking/mixing cells | `RNNs_By_Hand_basic` (GRU + Advanced) | `1_wb9uz377` second half |
 | 6 | Univariate RNN Pt 1: the 3-D tensor and `split_sequence` | `Univariate_Temperature_RNN` | `1_4awr1wvf` 7:51 |
 | 7 | Univariate RNN Pt 2: fit SimpleRNN, then LSTM, then beat the baselines | `Univariate_Temperature_RNN` | `1_qjmddsos` 7:00 + `1_f4bzdd6i` 5:22 (trim to one) |
-| **M4.2 — Multivariate, stock, advanced** | | | |
+| **M4.2 — Multivariate, stock** | | | |
 | 8 | Multivariate window method: room occupancy | `Multivariate_Occupancy_Lags` | `1_0q71m2q6` 7:36 |
 | 9 | Multivariate RNN Pt 1: `split_sequences`, column order, the classification head | `Multivariate_Occupancy_RNN` | `1_k20syja5` 7:00 |
 | 10 | Multivariate RNN Pt 2: LSTM swap, stacking, persistence baseline | `Multivariate_Occupancy_RNN` | `1_jbfi30un` 5:12 |
 | 11 | Predict the stock market (an honest result) | `Simple_Predict_The_Stock_Market_DL` | `1_r89vibek` 7:50 |
+| **M4.3 — Advanced + the capstone** | | | |
 | 12 | Conv1D + MaxPooling1D on a sequence, by hand | `Advanced_RNN_Theory` | `1_w7pmbgt1` 5:24 |
 | 13 | Recurrent dropout, stacking, bidirectional (the monsters) | `Advanced_RNN_Theory` | 2022 stacking/bidirectional videos |
 | 14 | ConvLSTM on the temperature and occupancy series | `Univariate_Temperature_RNN_Advanced` + `Multivariate_Occupancy_RNN_AdvancedTopics` | `1_3bfa459i` 4:30 |
 | 15 | Many-to-many: two targets at once, then multi-step ahead | `a_Many_To_Many_BDL_tmpf_and_vsby` + `b_..._tmpfPlus1` | `1_hru76zg7` 8:05 |
+| 16 | Forecasting electricity demand, Pt 1: data, baselines, a univariate LSTM | `Forecasting_Electricity_Demand_RNN` | NEW (Fall 2026) |
+| 17 | Forecasting electricity demand, Pt 2: add the weather, 24 hours ahead, call the peak | `Forecasting_Electricity_Demand_RNN` | NEW (Fall 2026) |
 
 ## Per-video one-liners (with the anchor numbers from the 2022 runs — re-verify on the Keras 3 run before you say them)
 
@@ -40,20 +43,23 @@ Fifteen videos across nine notebooks (🔴 markers placed after the Keras-3 exec
 5. **GRU + mixing.** G=3 (reset/update gates), counted the same way ×3 (`reset_after=False` to match the hand math). Then the by-hand appendix: stack cells, mix SimpleRNN → LSTM → GRU — one-word swaps in Keras, everything else identical.
 6. **Univariate RNN Pt 1.** Drop the window feature engineering; hand the RNN the raw sequence as a **3-D tensor**. 3,650 daily temperatures, look-back 10 → 3,640 samples of 10×1. `split_sequence`: [1,2,3]→4, [2,3,4]→5. The **reshape** to add the trailing 1 is where 90% of RNN errors live. 90/10 chronological: 3,276 train / 364 test.
 7. **Univariate RNN Pt 2.** Confirm `(3640, 10, 1)`; inherit `n_steps`/`n_features` from the shape; 30 red dots → 31×30+30 params, spinning 10 times. Linear output, MSE, MAE tracked, early stopping on val_loss. SimpleRNN MAE ≈ 1.77 vs window method 1.76 — *same*. LSTM ≈ 1.74. Then the sermon: beat **mean-only** and **persistence** (shift-1 ≈ 2.02) or you've learned nothing — and always metrics + scatter + time-series plot, so a shifted copy can't fool you.
-8. **Multivariate window.** Still the window method, now with covariates: HVAC sensors (temp, humidity, light, CO₂) → occupied? Mostly unoccupied (imbalance); plot target with CO₂ and the story tells itself. Lag features from the past few minutes, **drop lagged occupancy to avoid leakage** (20 columns), 50/50 unshuffled, sigmoid → ~97% and a mostly-diagonal confusion matrix.
-9. **Multivariate RNN Pt 1.** Multivariate differs only in prep: all X on the left, **target as the last column** (drop the date), look-back is the hyperparameter. `split_sequences` with look-back 10 → 2,655 samples of 10×features. SimpleRNN with a sigmoid head, `n_steps`/`n_features` inherited from the shape; it may learn in one epoch — add dropout. Show the time-series plot even for classification: it misses the quick in/out transitions.
-10. **Multivariate RNN Pt 2.** One-word LSTM swap: (features+units)×units+bias, ×4 = **4,320**. It predicts the zeros a bit better; weighted F1 comparable. Stacked SimpleRNN with `return_sequences=True` keeps the 10×30 sequence into a second RNN — and does *worse* here (too complex for an easy problem). Persistence is brutal to beat; show value over the dummy. The `-1` predicts the next step — change it for multi-step.
+8. **Multivariate window.** Still the window method, now with covariates: HVAC sensors (temp, humidity, light, CO₂) → occupied? Mostly unoccupied (imbalance); plot target with CO₂ and the story tells itself. Two weeks of 1-minute sensor data (17,895 rows — the real UCI training + test files, new for 2026). Lag features from the past few minutes, **drop lagged occupancy to avoid leakage** (20 columns), 50/50 unshuffled, sigmoid → ~94% and a mostly-diagonal confusion matrix.
+9. **Multivariate RNN Pt 1.** Multivariate differs only in prep: all X on the left, **target as the last column** (drop the date), look-back is the hyperparameter. `split_sequences` with look-back 10 → 8,943 test samples of 10×features (two weeks of data now, so `batch_size=64`). SimpleRNN with a sigmoid head, `n_steps`/`n_features` inherited from the shape; it may learn in one epoch — add dropout. Show the time-series plot even for classification: it misses the quick in/out transitions.
+10. **Multivariate RNN Pt 2.** One-word LSTM swap: (features+units)×units+bias, ×4 = **4,320**. SimpleRNN ~0.93 → LSTM ~0.95 weighted F1 — a little better. Stacked SimpleRNN with `return_sequences=True` keeps the 10×30 sequence into a second RNN — and lands at ~0.94 — no better (more capacity isn't automatically better on an easy problem). Persistence scores ~0.99 — brutal to beat at one minute ahead; show value over the dummy honestly. The `-1` predicts the next step — change it for multi-step.
 11. **Stock market.** Several tickers 2017–2020, percent change, label Walmart's next-day up/down (shift by 1 — no same-day cheating). StandardScaler, 50/50, look-back 5, 11 features. Stacked LSTMs + dropout, patience 20. Result: barely beats 50%, weighted F1 < 0.5, lots of false positives — **"don't trade on it."** That's the honest lesson, and it's the best video in the module.
 12. **Conv1D by hand.** A 21×9 sample, kernel 2, one filter → 20×1 (rows = 21−2+1, columns = filters). Params: a 1×2 kernel per column (9) + 1 bias = **19**. `MaxPooling1D(2)` is the domino: 20×1 → 10×1. Into a SimpleRNN(30): 10 spins → 1×30, 960 params, **1,010** total. More filters → richer sequences (20×3 → 10×3). It's `Conv1D`, not `Conv2D`, and pull `input_shape` from `X_train`.
 13. **The monsters.** Recurrent dropout regularizes the recurrent connection, not just the inputs. Stack with `return_sequences=True` (more layers ≠ better — it's a hyperparameter). `Bidirectional(LSTM(3))` reads forward and backward with two independent cells and **concatenates** → width 6; patterns hard to see forward sometimes pop out backward. Build Monster #1 and #2 and read the parameter counts off `summary()`.
 14. **ConvLSTM.** Data prep unchanged — add convolution + pooling in front of the LSTM. Univariate: look-back 30, kernel 3, 32 filters → 30×1 becomes 28×32. Multivariate: look-back 50, 5 features → 48×32, pooled to 24×32, then a SimpleRNN. The secret sauce is just shapes: mind `input_shape`, `return_sequences` when stacking, and know every output shape and param count.
 15. **Many-to-many.** Two flavors. (a) Several targets at once — dew point and pressure from the other weather variables, both Y columns placed **last** (`split_sequences` chops from the right), `Dense(2, linear)` so one LSTM's weights are shaped by both targets ("borrow strength"). (b) Multi-step — forecast the next 3 hours (3 outputs); quality degrades further out. One model doing a whole forecasting job.
 
+16. **Demand Pt 1.** You are the utility; forecast tomorrow's hourly load - the Assignment 2 data as a sequence. The file is **unsorted** (show it). EDA beats: a July week, hour-of-day and month profiles, the demand-vs-temperature U, the 2020 COVID dip. Train 2017-18, test 2019, no shuffle. **Baselines first:** mean-only 554 MW, same-hour-yesterday 227, last-hour persistence 129 - read them off the table on screen. Univariate LSTM, look-back 24, scaled on train only: **~44 MW**, three times better than persistence, because two years of history taught it the daily shape.
+17. **Demand Pt 2.** Add temperature, dew point, humidity and the **clock as sin/cos**; Demand last. Demand's own past stays in the inputs (that's the fix students always miss). Weather + clock: ~44 -> **~34 MW** at one hour ahead - helps, but the last hour already carries most of it. Then the real job: past week -> next 24 hours, `Dense(24)`, and the **MAE-by-horizon** plot against seasonal-naive (~167 vs 227 averaged over the day). Peak-hour classifier: top-10% hours, majority baseline 91.5%, so read precision/recall (~0.91 / ~0.88). Close on the seed + save/reload.
+
 ## The through-lines to keep hitting
 
 - **It's all data prep.** ConvNets: get the folders right. RNNs: get the tensor right — `(samples, look-back, features)`. Say the deck-of-cards picture every time.
 - **One formula for every cell.** G·[H(H+I)+H], G = 1/3/4. Videos 3, 4, 5, 10, 12 all count parameters — same muscle, and Assignment 5 (RNN Math) grades it.
-- **Beat the dumb models.** Mean-only, persistence, linear on the lags. Persistence is the villain of the module; the stock video is the humility check.
+- **Beat the dumb models.** Mean-only, persistence, seasonal-naive, linear on the lags. Persistence is the villain of the module at one step ahead; seasonal-naive is the fair villain a day ahead; the stock video is the humility check.
 - **Bridge back.** Chapter 2's dense head is still the head; Chapter 3's convolution shows up again as `Conv1D`; early stopping, curves, confusion matrix — unchanged methodology.
 
 ## Guardrails (slips to not make twice)

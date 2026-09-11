@@ -17,17 +17,25 @@
 - [ ] Fit a SimpleRNN / LSTM regressor with early stopping and compare MAE against the window-method dense net
 - [ ] Build and **beat the baselines** — mean-only, **persistence** (shift-1), linear on lags — and report metric + scatter + time-series plot together
 
-## M4.2 — Multivariate, stock, advanced
+## M4.2 — Multivariate, stock
 
 - [ ] Build **lag features from multiple covariates** and drop the lagged target to avoid leakage (occupancy example)
 - [ ] Use `split_sequences` for multivariate data: X columns left, **target last**, look-back as the hyperparameter; inherit `n_steps`/`n_features` from the tensor shape
 - [ ] Put a **classification head** (sigmoid, binary crossentropy) on a recurrent model and read a confusion matrix *and* a time-series plot of predictions
 - [ ] Stack recurrent layers with **`return_sequences=True`** and explain why deeper isn't automatically better
 - [ ] Run an honest end-to-end sequence classifier on **stock returns** (percent change, next-day shift, scaling, look-back 5) and interpret a near-50% result correctly
+
+## M4.3 — Advanced + the capstone
+
 - [ ] Work a **`Conv1D` + `MaxPooling1D`** layer by hand on a sequence — output length, filter count, parameter count — and say why it's `Conv1D`, not `Conv2D`
 - [ ] Add **recurrent dropout**, stacking, and **`Bidirectional`** wrappers, and read the concatenated output width off `model.summary()`
 - [ ] Assemble a **ConvLSTM** (conv + pooling → recurrent) for univariate and multivariate series with correct `input_shape`
 - [ ] Build a **many-to-many** model: several targets at once (`Dense(k, linear)`, target columns last) and **multi-step-ahead** forecasts, and explain how quality degrades with horizon
+- [ ] Take a raw hourly series (electricity demand) from file to forecast: **check it is sorted**, split by year, and score **mean-only / seasonal-naive / persistence** before any network
+- [ ] Encode the clock as **sine/cosine** features and put the target **last** for `split_sequences`; explain why weather barely helps at one hour ahead
+- [ ] Build a **24-hour-ahead** model (`Dense(24)`) and read an **MAE-by-horizon** plot against the seasonal-naive baseline
+- [ ] Frame a **peak-hour** flag as imbalanced classification and judge it by precision/recall, not accuracy
+- [ ] Save a trained model to a `.keras` file, reload it, and prove the predictions are identical (seed + saved artifact = reproducibility)
 
 ## Assessed by
 
