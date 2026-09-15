@@ -8,8 +8,8 @@ Everything so far had no order — shuffle the rows and nothing changes. A time 
 
 ```
   M4.1  Theory, by hand, univariate   window method → SimpleRNN → params (G·[H(H+I)+H]) → LSTM/GRU → temperature series
-  M4.2  Multivariate, stock                occupancy → stock returns (honest)
-  M4.3  Advanced + the capstone          Conv1D → dropout/stacking/bidirectional → ConvLSTM → many-to-many → electricity demand → multi-step strategies → explaining the model
+  M4.2  Multivariate, stock, RNN theory  occupancy → stock returns (honest) → Conv1D → dropout/stacking/bidirectional
+  M4.3  Advanced + the capstone          ConvLSTM → many-to-many → electricity demand → multi-step strategies → explaining the model
 ```
 
 ## M4.1 — Theory, by hand, univariate
@@ -20,19 +20,19 @@ Everything so far had no order — shuffle the rows and nothing changes. A time 
 | 2 | **RNNs By Hand** | SimpleRNN → LSTM → GRU with a pencil: the hidden-state handoff, `output = units`, and one parameter formula for every cell | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/RNNs_By_Hand_basic.ipynb) |
 | 3 | **Univariate Temperature — RNN** | `split_sequence` → the 3-D tensor `(samples, look-back, 1)` → SimpleRNN, then LSTM, then beat mean-only and persistence | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Univariate_Temperature_RNN.ipynb) |
 
-## M4.2 — Multivariate, stock
+## M4.2 — Multivariate, stock, advanced RNN theory
 
 | # | Notebook | What you'll do | Open |
 | :-- | :-- | :-- | :-- |
 | 4 | **Multivariate Occupancy — Lags** | Window method with covariates (HVAC sensors → occupied?), lagged features without leaking the target | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Multivariate_Occupancy_Lags.ipynb) |
 | 5 | **Multivariate Occupancy — RNN** | `split_sequences` with the target last, a sigmoid head, the LSTM swap, stacking with `return_sequences`, the persistence baseline | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Multivariate_Occupancy_RNN.ipynb) |
 | 6 | **Predict the Stock Market (simple)** | Returns of 11 tickers → will Walmart rise tomorrow? Stacked LSTMs, and an honest near-50% answer: *don't trade on it* | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Simple_Predict_The_Stock_Market_DL.ipynb) |
+| 7 | **Advanced RNN Theory** | `Conv1D` + `MaxPooling1D` by hand, recurrent dropout, stacking, `Bidirectional` — and two "monster" architectures to read off `summary()` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Advanced_RNN_Theory.ipynb) |
 
 ## M4.3 — Advanced + the capstone
 
 | # | Notebook | What you'll do | Open |
 | :-- | :-- | :-- | :-- |
-| 7 | **Advanced RNN Theory** | `Conv1D` + `MaxPooling1D` by hand, recurrent dropout, stacking, `Bidirectional` — and two "monster" architectures to read off `summary()` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Advanced_RNN_Theory.ipynb) |
 | 8 | **Univariate Temperature — Advanced** | ConvLSTM on the temperature series: conv + pooling in front of the recurrent layer | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Univariate_Temperature_RNN_Advanced.ipynb) |
 | — | *Multivariate Occupancy — Advanced Topics* | The same upgrades on the occupancy series — reference, no separate video | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Multivariate_Occupancy_RNN_AdvancedTopics.ipynb) |
 | 9 | **Many-to-Many (a): two targets** | Predict dew point *and* pressure at once — targets last, `Dense(2, linear)`, one model borrowing strength across both | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/a_Many_To_Many_BDL_tmpf_and_vsby.ipynb) |

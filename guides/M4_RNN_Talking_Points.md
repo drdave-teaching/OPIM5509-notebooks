@@ -7,7 +7,7 @@ Twenty-two videos across fifteen notebooks (🔴 markers placed after the Keras-
 
 **Target: ≤8 minutes per video.** The 2022 M4 videos ran 4:30–10:06; the two long ones (LSTM-by-hand 10:06, many-to-many 8:05) are split below. Same pattern as M2/M3: motivate with the example, then work the concrete case, then the number.
 
-**Split (mirrors the 2022 module):** M4.1 = theory + by hand + univariate (videos 1–7); M4.2 = multivariate + stock (8–11); M4.3 = advanced + the demand capstone (12–19).
+**Split (8 / 7 / 8, planned 2026-09-15):** M4.1 = theory + by hand + univariate (videos 1–7 + 7b); M4.2 = multivariate + stock + advanced RNN theory (8–13 + 10b), so the Conv1D and bidirectional parameter math lands in the week before Assignment 5 (RNN Math, due Nov 6); M4.3 = ConvLSTM, many-to-many and the demand capstone (14–19 + 17b).
 
 ## Running order
 
@@ -22,15 +22,15 @@ Twenty-two videos across fifteen notebooks (🔴 markers placed after the Keras-
 | 6 | Univariate RNN Pt 1: the 3-D tensor and `split_sequence` | `Univariate_Temperature_RNN` | `1_4awr1wvf` 7:51 |
 | 7 | Univariate RNN Pt 2: fit SimpleRNN, then LSTM, then beat the baselines | `Univariate_Temperature_RNN` | `1_qjmddsos` 7:00 + `1_f4bzdd6i` 5:22 (trim to one) |
 | 7b | Univariate RNN Pt 2b: reload the saved LSTM, explain it, roll it forward | `Univariate_Temperature_RNN_pt2` | NEW (Fall 2026) |
-| **M4.2 — Multivariate, stock** | | | |
+| **M4.2 — Multivariate, stock, advanced RNN theory** | | | |
 | 8 | Multivariate window method: room occupancy | `Multivariate_Occupancy_Lags` | `1_0q71m2q6` 7:36 |
 | 9 | Multivariate RNN Pt 1: `split_sequences`, column order, the classification head | `Multivariate_Occupancy_RNN` | `1_k20syja5` 7:00 |
 | 10 | Multivariate RNN Pt 2: LSTM swap, stacking, persistence baseline | `Multivariate_Occupancy_RNN` | `1_jbfi30un` 5:12 |
 | 10b | Multivariate RNN Pt 2b: reload the classifier, score two unseen days, explain it | `Multivariate_Occupancy_RNN_pt2` | NEW (Fall 2026) |
 | 11 | Predict the stock market (an honest result) | `Simple_Predict_The_Stock_Market_DL` | `1_r89vibek` 7:50 |
-| **M4.3 — Advanced + the capstone** | | | |
 | 12 | Conv1D + MaxPooling1D on a sequence, by hand | `Advanced_RNN_Theory` | `1_w7pmbgt1` 5:24 |
 | 13 | Recurrent dropout, stacking, bidirectional (the monsters) | `Advanced_RNN_Theory` | 2022 stacking/bidirectional videos |
+| **M4.3 — Advanced + the capstone** | | | |
 | 14 | ConvLSTM on the temperature and occupancy series | `Univariate_Temperature_RNN_Advanced` + `Multivariate_Occupancy_RNN_AdvancedTopics` | `1_3bfa459i` 4:30 |
 | 15 | Many-to-many: two targets at once, then multi-step ahead | `a_Many_To_Many_BDL_tmpf_and_vsby` + `b_..._tmpfPlus1` | `1_hru76zg7` 8:05 |
 | 16 | Forecasting electricity demand, Pt 1: data, baselines, a univariate LSTM | `Forecasting_Electricity_Demand_RNN` | NEW (Fall 2026) |
