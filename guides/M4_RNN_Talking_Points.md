@@ -3,7 +3,7 @@
 **OPIM 5509 - Introduction to Deep Learning · Dr. Dave Wanik · University of Connecticut**
 *Fall 2026 · recording notes — read before you hit record*
 
-Twenty-three videos across fifteen notebooks (🔴 markers placed after the Keras-3 execution audit; full talking points live inside each marker's HTML comment — double-click the red dot while recording). This file is the running order and the per-video one-liner.
+Twenty-five videos across sixteen notebooks (🔴 markers placed after the Keras-3 execution audit; full talking points live inside each marker's HTML comment — double-click the red dot while recording). This file is the running order and the per-video one-liner.
 
 **Target: ≤8 minutes per video.** The 2022 M4 videos ran 4:30–10:06; the two long ones (LSTM-by-hand 10:06, many-to-many 8:05) are split below. Same pattern as M2/M3: motivate with the example, then work the concrete case, then the number.
 
@@ -15,6 +15,8 @@ Twenty-three videos across fifteen notebooks (🔴 markers placed after the Kera
 | :-- | :-- | :-- | :-- |
 | **M4.1 — Theory, by hand, univariate** | | | |
 | 1 | Sequences are different + the window method (lags) | `Univariate_Temperature_Lags` | `1_7xr2r7ll` 7:52 |
+| 1b | Making samples for an RNN: `split_sequence` and `split_sequences` (look-back 5) | `RNN_Samples_and_the_Hidden_State` | NEW (Fall 2026) |
+| 1c | What the red dots do: one step at a time, then Dense (or another RNN) | `RNN_Samples_and_the_Hidden_State` | NEW (Fall 2026) |
 | 2 | The vanilla RNN, one time step at a time | `RNNs_By_Hand_basic` (SimpleRNN basic) | `1_ntq9yduo` 8:00 |
 | 3 | Trainable parameters and output shape of a SimpleRNN | `RNNs_By_Hand_basic` (SimpleRNN advanced) | `1_b8zl03ki` 5:13 |
 | 4 | LSTM by hand: four networks and a cell state | `RNNs_By_Hand_basic` (LSTM basic/advanced) | `1_wb9uz377` 10:06 → first half |
@@ -55,6 +57,8 @@ Twenty-three videos across fifteen notebooks (🔴 markers placed after the Kera
 ## Per-video one-liners (M4.1 numbers verified against the stored Keras 3 outputs on 2026-09-15; M4.2+ still quote what's on screen)
 
 1. **Window method.** Shuffle Boston/California and nothing changes; shuffle a temperature series and you've destroyed it. The window method *deliberately* destroys the order — past 10 days become 10 columns — so any model works. 90/10 **chronological** split (no shuffle, or you leak the future). Dense net, **361** params, MAE **1.80** on screen. Close with the trap: a 45° scatter *plus* a time-series plot, because a model can look great by just repeating yesterday.
+1b. **Making samples.** The lags table was flat; an RNN wants `(samples, look-back, features)`. GIF: 12 values, look-back 5, the green window slides, 12 − 5 = **7** samples; then `split_sequence` prints the same table and the reshape adds the trailing 1: `(7, 5, 1)`. Three stocks (AAPL, MSFT, TSLA, made-up % changes) with the target last → `split_sequences` → `(9, 5, 3)`; show one sample as a 5 × 3 table.
+1c. **What the red dots do.** GIF: the two red dots start at [0, 0] and are recomputed each day from today's 3 green dots and the previous red dots, same W, U, b every step: $h_t = 	anh(x_t W + h_{t-1} U + b)$. The notebook pulls Keras' weights and reruns the loop in NumPy — **identical** at every step. Default: only the final pair → `Dense(1, sigmoid)`. Stacked GIF: `return_sequences=True` keeps all 5 pairs `(None, 5, 2)` for a second SimpleRNN, whose i is 2 → **10** params; total **12 + 10 + 3 = 25**.
 2. **Vanilla RNN.** Three features meet two hidden units (the red dots) — a 5-input dense net with tanh — and the trick is the **handoff**: each time step's hidden state feeds the next, so the final state has seen the whole window. `SimpleRNN(units)` sets the red-dot count, and the **output shape is always `units`**. Data prep is the whole game: `(samples, look-back, features)`.
 3. **SimpleRNN parameters.** Cell = (features + units) × units + bias. H=2, I=3 → 12, plus a 1-unit dense head (3) = **15**. Bigger: 30 features, 25 units → (30+25)×25+25 = 1,400, +26 = **1,426**. The general formula is **G · [H(H+I) + H]** and G is the number of little networks in the cell — SimpleRNN G=1.
 4. **LSTM by hand.** G=4: four networks, plus a **cell state** (long memory) beside the hidden state (recent memory) — that's what fixes the vanishing gradient. 5 inputs × 2 units + 2 bias = 12 per network, ×4 = **48**, + a 3-param dense head = **51** in `summary()`; the bigger one is 160 + 5 = **165**. Same formula, G=4. Say why it's slow: every step spins all four networks.

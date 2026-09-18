@@ -17,6 +17,7 @@ Everything so far had no order — shuffle the rows and nothing changes. A time 
 | # | Notebook | What you'll do | Open |
 | :-- | :-- | :-- | :-- |
 | 1 | **Univariate Temperature — Lags** | The window method: past `n_steps` days become columns, chronological split, a dense net baseline (and the persistence trap) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Univariate_Temperature_Lags.ipynb) |
+| 1b | **RNN Samples and the Hidden State** | How `split_sequence` / `split_sequences` build the 3-D tensor (look-back 5), then what a SimpleRNN does with one sample — red dots updated step by step, checked by hand against Keras — and what `return_sequences=True` hands to a stacked layer. Three animated GIFs | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/RNN_Samples_and_the_Hidden_State.ipynb) |
 | 2 | **RNNs By Hand** | SimpleRNN → LSTM → GRU with a pencil: the hidden-state handoff, `output = units`, and one parameter formula for every cell | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/RNNs_By_Hand_basic.ipynb) |
 | 3 | **Univariate Temperature — RNN** | `split_sequence` → the 3-D tensor `(samples, look-back, 1)` → SimpleRNN, then LSTM, then beat mean-only and persistence | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/Module4/Univariate_Temperature_RNN.ipynb) |
 
@@ -53,7 +54,7 @@ Everything so far had no order — shuffle the rows and nothing changes. A time 
 
 | Guide | Use it for |
 | :-- | :-- |
-| [🎙 Talking Points](../guides/M4_RNN_Talking_Points.md) | Instructor — the 23-video recording plan with running order and anchor numbers |
+| [🎙 Talking Points](../guides/M4_RNN_Talking_Points.md) | Instructor — the 25-video recording plan with running order and anchor numbers |
 | [✅ Skills Sheet](../guides/M4_RNN_Skills.md) | The checklist of what you should own before Module 5 |
 
 ## Keras 3 / pandas 3 audit (Fall 2026)
