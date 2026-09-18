@@ -40,6 +40,18 @@ Twenty-three videos across fifteen notebooks (🔴 markers placed after the Kera
 | 18b | Another use case: two weeks of daily demand — past demand or the weather forecast? | `Multi_Step_Forecasting_Strategies` (second half) | NEW (Fall 2026) |
 | 19 | What is the LSTM looking at? xAI for sequences | `Explaining_an_LSTM` | NEW (Fall 2026) |
 
+## Opening script for video 2 (the RNN introduction, approved 2026-09-18)
+
+> Hi folks, welcome to recurrent neural networks. In this video I'll show you how a recurrent layer works, one time step at a time, and then how to count its trainable parameters.
+>
+> Here's why we care. In the window method, we built lag columns by hand, and the model had no idea those columns were in order. A recurrent layer respects the order: it reads the sequence oldest to newest, and yesterday can shape how it reads today.
+>
+> So instead of engineering lag features, we hand it a 3-D tensor of samples, look-back steps and features. One small network reads each window a step at a time, reusing the same weights at every step, and its final hidden state goes into the dense layers we already know.
+>
+> Later in this module we'll stack recurrent layers and add convolution and pooling in front of them. First, the basics.
+
+**Say it right:** the window is read oldest to newest (50 days ago first, yesterday last); the hidden state starts at zeros; the same weights are reused at every step, which is why the parameter count ignores the look-back; only the final hidden state reaches the dense layer (`return_sequences=False`); `input_shape` is `(n_steps, n_features)`, and the number of samples is the `None`.
+
 ## Per-video one-liners (M4.1 numbers verified against the stored Keras 3 outputs on 2026-09-15; M4.2+ still quote what's on screen)
 
 1. **Window method.** Shuffle Boston/California and nothing changes; shuffle a temperature series and you've destroyed it. The window method *deliberately* destroys the order — past 10 days become 10 columns — so any model works. 90/10 **chronological** split (no shuffle, or you leak the future). Dense net, **361** params, MAE **1.80** on screen. Close with the trap: a 45° scatter *plus* a time-series plot, because a model can look great by just repeating yesterday.
