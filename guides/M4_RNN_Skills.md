@@ -45,4 +45,4 @@
 
 ## Assessed by
 
-**Assignment 5 (RNN Math)** — parameter counts and output shapes for recurrent, Conv1D, and bidirectional layers, by hand.
+**Assignment 5 (RNN Math)** — parameter counts and output shapes for **recurrent layers only** (SimpleRNN, LSTM, GRU; single and stacked), by hand. **Scope narrowed 2026-09-21:** Conv1D, pooling and bidirectional are no longer on it - they moved to Module 4.3, after the due date.
