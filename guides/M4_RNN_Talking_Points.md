@@ -23,7 +23,7 @@ Twenty-five videos across sixteen notebooks (🔴 markers placed after the Keras
 | 5 | GRU by hand, and stacking/mixing cells | `RNNs_By_Hand_basic` (GRU + Advanced) | `1_wb9uz377` second half |
 | 6 | Univariate RNN Pt 1: the 3-D tensor and `split_sequence` | `Univariate_Temperature_RNN` | `1_4awr1wvf` 7:51 |
 | 7 | Univariate RNN Pt 2: fit SimpleRNN, then LSTM, then beat the baselines | `Univariate_Temperature_RNN` | `1_qjmddsos` 7:00 + `1_f4bzdd6i` 5:22 (trim to one) |
-| 7b | Univariate RNN Pt 2b: reload the saved LSTM, explain it, roll it forward | `Univariate_Temperature_RNN_pt2` | NEW (Fall 2026) |
+| 7b | Univariate RNN Pt 2b: reload the saved LSTM, occlusion by lag, roll it forward | `Univariate_Temperature_RNN_pt2` | NEW (Fall 2026) |
 | **M4.2 — Multivariate, stock, advanced RNN theory** | | | |
 | 8 | Multivariate window method: room occupancy | `Multivariate_Occupancy_Lags` | `1_0q71m2q6` 7:36 |
 | 9 | Multivariate RNN Pt 1: `split_sequences`, column order, the classification head | `Multivariate_Occupancy_RNN` | `1_k20syja5` 7:00 |
@@ -41,6 +41,7 @@ Twenty-five videos across sixteen notebooks (🔴 markers placed after the Keras
 | 18 | Tomorrow, three ways: recursive vs direct vs multi-output, and where future covariates come from | `Multi_Step_Forecasting_Strategies` | NEW (Fall 2026) |
 | 18b | Another use case: two weeks of daily demand — past demand or the weather forecast? | `Multi_Step_Forecasting_Strategies` (second half) | NEW (Fall 2026) |
 | 19 | What is the LSTM looking at? xAI for sequences | `Explaining_an_LSTM` | NEW (Fall 2026) |
+| 19b | Gradient saliency, and how to check that it isn't lying to you | `Gradient_Saliency_by_Hand` | NEW (Fall 2026) — **unscheduled**, Dave records it when he's ready |
 
 ## Opening script for video 2 (the RNN introduction, approved 2026-09-18)
 
