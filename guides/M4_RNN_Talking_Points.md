@@ -7,7 +7,7 @@ Twenty-five videos across sixteen notebooks (🔴 markers placed after the Keras
 
 **Target: ≤8 minutes per video.** The 2022 M4 videos ran 4:30–10:06; the two long ones (LSTM-by-hand 10:06, many-to-many 8:05) are split below. Same pattern as M2/M3: motivate with the example, then work the concrete case, then the number.
 
-**Split (8 / 7 / 8, planned 2026-09-15):** M4.1 = theory + by hand + univariate (videos 1–7 + 7b); M4.2 = multivariate + stock + advanced RNN theory (8–13 + 10b). **The line between M4.1 and M4.2 theory is ONE LAYER vs MANY** (set 2026-09-21, and the notebooks agree: nothing in M4.1 stacks - `Univariate_Temperature_RNN` fits a single `SimpleRNN(30)` and a single `LSTM(30)` with no `return_sequences`; the first stacked model in the course is video 10's occupancy classifier). M4.1 owns one recurrent layer: by-hand **Examples 1-6**, and `RNN_Samples_and_the_Hidden_State` **Parts 1-2**. M4.2 owns everything deeper or wider: `RNN_Samples` **Part 3**, by-hand **Examples 7-11**, and all of `Advanced_RNN_Theory` - landing the week before Assignment 5 (RNN Math, due Nov 6). ⚠️ **Ordering note:** video 10 *uses* stacking, so video 13 should be moved to the FRONT of M4.2, before video 8; M4.3 = ConvLSTM, many-to-many and the demand capstone (14–19 + 17b).
+**Split (8 / 7 / 8, planned 2026-09-15):** M4.1 = theory + by hand + univariate (videos 1–7 + 7b); M4.2 = multivariate + stock + advanced RNN theory (8–13 + 10b). **The line between M4.1 and M4.2 theory is ONE LAYER vs MANY** (set 2026-09-21, and the notebooks agree: nothing in M4.1 stacks - `Univariate_Temperature_RNN` fits a single `SimpleRNN(30)` and a single `LSTM(30)` with no `return_sequences`; the first stacked model in the course is video 10's occupancy classifier). M4.1 owns one recurrent layer: by-hand **Examples 1-6**, and `RNN_Samples_and_the_Hidden_State` **Parts 1-2**. M4.2 owns everything deeper or wider: `RNN_Samples` **Part 3**, by-hand **Examples 7-11**, and all of `Advanced_RNN_Theory` - landing the week before Assignment 5 (RNN Math, due Nov 6). **M4.2 plays in this order: 13, 8, 9, 10, 10b, 11, 12** (decided 2026-09-21). Video 13 leads because video 10 *uses* stacking, so the theory has to land first. The numbers are kept as identifiers - they tie back to the 2022 Kaltura sources and to the talking-point markers embedded in the notebooks - but the recording and posting order is the one above; M4.3 = ConvLSTM, many-to-many and the demand capstone (14–19 + 17b).
 
 ## Running order
 
@@ -21,17 +21,17 @@ Twenty-five videos across sixteen notebooks (🔴 markers placed after the Keras
 | 3 | Same formula, bigger numbers; output shapes | `RNNs_By_Hand_basic` (Example 2) | `1_b8zl03ki` 5:13 |
 | 4 | LSTM by hand: four networks and a cell state | `RNNs_By_Hand_basic` (Examples 3-4) | `1_wb9uz377` 10:06 → first half |
 | 5 | GRU by hand, and the `reset_after` trap (**stop at the stacking banner**) | `RNNs_By_Hand_basic` (Examples 5-6) | `1_wb9uz377` second half |
-| 6 | Univariate RNN Pt 1: the 3-D tensor and `split_sequence` | `Univariate_Temperature_RNN` | `1_4awr1wvf` 7:51 |
+| 6 | Univariate RNN **Pt 1**: the 3-D tensor and `split_sequence` | `Univariate_Temperature_RNN` | `1_4awr1wvf` 7:51 |
 | 7 | Univariate RNN Pt 2: fit SimpleRNN, then LSTM, then beat the baselines | `Univariate_Temperature_RNN` | `1_qjmddsos` 7:00 + `1_f4bzdd6i` 5:22 (trim to one) |
-| 7b | Univariate RNN Pt 2b: reload the saved LSTM, occlusion by lag, roll it forward | `Univariate_Temperature_RNN_pt2` | NEW (Fall 2026) |
+| 7b | Univariate RNN **Pt 2**: reload the saved LSTM, occlusion by lag, roll it forward | `Univariate_Temperature_RNN_pt2` | NEW (Fall 2026) |
 | **M4.2 — Multivariate, stock, advanced RNN theory** | | | |
+| 13 | Stacking and mixing cells, recurrent dropout, bidirectional (the monsters) | `RNN_Samples_and_the_Hidden_State` Part 3 → `RNNs_By_Hand_basic` (Examples 7-11) → `Advanced_RNN_Theory` | 2022 stacking/bidirectional videos |
 | 8 | Multivariate window method: room occupancy | `Multivariate_Occupancy_Lags` | `1_0q71m2q6` 7:36 |
 | 9 | Multivariate RNN Pt 1: `split_sequences`, column order, the classification head | `Multivariate_Occupancy_RNN` | `1_k20syja5` 7:00 |
 | 10 | Multivariate RNN Pt 2: LSTM swap, stacking, persistence baseline | `Multivariate_Occupancy_RNN` | `1_jbfi30un` 5:12 |
 | 10b | Multivariate RNN Pt 2b: reload the classifier, score two unseen days, explain it | `Multivariate_Occupancy_RNN_pt2` | NEW (Fall 2026) |
 | 11 | Predict the stock market (an honest result) | `Simple_Predict_The_Stock_Market_DL` | `1_r89vibek` 7:50 |
 | 12 | Conv1D + MaxPooling1D on a sequence, by hand | `Advanced_RNN_Theory` | `1_w7pmbgt1` 5:24 |
-| 13 | Stacking and mixing cells, recurrent dropout, bidirectional (the monsters) | `RNN_Samples_and_the_Hidden_State` Part 3 → `RNNs_By_Hand_basic` (Examples 7-11) → `Advanced_RNN_Theory` | 2022 stacking/bidirectional videos |
 | **M4.3 — Advanced + the capstone** | | | |
 | 14 | ConvLSTM on the temperature and occupancy series | `Univariate_Temperature_RNN_Advanced` + `Multivariate_Occupancy_RNN_AdvancedTopics` | `1_3bfa459i` 4:30 |
 | 15 | Many-to-many: two targets at once, then multi-step ahead | `a_Many_To_Many_BDL_tmpf_and_vsby` + `b_..._tmpfPlus1` | `1_hru76zg7` 8:05 |
