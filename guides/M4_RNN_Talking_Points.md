@@ -72,14 +72,20 @@ labelled 0. Those 3% are where the model earns its money.
 
 **10 — the LSTM swap and stacking.** Read the table off the screen:
 
-| model | test F1 | decisive calls | error near a change | elsewhere |
-| :-- | --: | --: | --: | --: |
-| SimpleRNN(30) | 0.952 | 95.0% | 25.6% | 3.9% (6.5x) |
-| LSTM(30) | **0.953** | **96.3%** | **30.2%** | 3.8% (8.0x) |
-| stacked SimpleRNN x2 | 0.941 | **69.5%** | 25.6% | 5.2% (5.0x) |
+| model | test F1 | commits | right when it COMMITS | right when it HEDGES | error near a change |
+| :-- | --: | --: | --: | --: | --: |
+| SimpleRNN(30) | 0.952 | 95.0% | 96.8% | 66.4% | 25.6% (6.5x) |
+| LSTM(30) | **0.953** | 96.3% | 95.7% | 82.6% | **30.2%** (8.0x) |
+| stacked SimpleRNN x2 | 0.941 | **69.5%** | **99.9%** | 81.0% | 25.6% (5.0x) |
+| **persistence** | **0.995** | - | - | - | - |
 
-Three honest beats. (a) **Stacking made it worse** - lower F1 AND it hedges on a third of its calls. More capacity
-is a hyperparameter, not an upgrade. (b) **The LSTM barely wins**, 0.953 vs 0.952. (c) ⚠️ **The LSTM is WORSE at
+**Nothing beat persistence.** 0.995 against the best model's 0.953. Say it plainly - that is the honest headline
+of this dataset, and it is why Module 4.3 moves to electricity demand.
+
+Three honest beats. (a) **The stacked model is the most trustworthy, not the worst.** It has the lowest F1, but
+when it commits it is right **99.9%** of the time - it simply refuses to commit on 30% of windows. Low F1, superb
+calibration: two different virtues, and worth separating out loud. (b) **The LSTM barely wins on F1**, 0.953 vs
+0.952, and its extra confidence is not earned - 95.7% right when committing, the worst of the three. (c) ⚠️ **The LSTM is WORSE at
 transitions** - 30.2% vs the SimpleRNN's 25.6% - which is exactly where its memory should have helped. Say that out
 loud: it tells you this dataset has very little sequence in it, which is the same thing persistence at 0.99 is
 telling you. It is a lesson about the *data*, not about LSTMs.
