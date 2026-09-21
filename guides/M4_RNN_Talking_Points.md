@@ -55,6 +55,45 @@ Twenty-five videos across sixteen notebooks (🔴 markers placed after the Keras
 
 **Say it right:** the window is read oldest to newest (50 days ago first, yesterday last); the hidden state starts at zeros; the same weights are reused at every step, which is why the parameter count ignores the look-back; only the final hidden state reaches the dense layer (`return_sequences=False`); `input_shape` is `(n_steps, n_features)`, and the number of samples is the `None`.
 
+
+## Occupancy videos 8 / 9 / 10 / 10b — verified numbers (2026-09-21)
+
+Every figure below is printed by the notebooks as they stand. Both notebooks now use **look-back 10**, so the ONLY
+thing that changes between video 8 and video 9 is the shape of X.
+
+**8 — the window method.** `10 minutes x 5 sensors = 50 columns, flattened into ONE ROW per sample`. Dense net:
+**test F1 0.943**, train 0.970 (gap -0.027). Say the shape out loud: `(8943, 50)` here, `(8943, 10, 5)` next video.
+
+**9 — the 3-D tensor.** Open on *"What exactly is one sample?"*: **one sample is a ten-minute clip of the five
+sensors, and the model answers one question about it - was the room occupied at the END of the clip?** Two traps to
+name: the label is the LAST minute, and occupancy is never an input (`[:, :-1]` drops it). Then the diagnostic:
+**96.9% of windows are pure, 3.1% mixed**, and window 7 is `[1 1 1 1 1 1 1 1 1 0]` - a walk-out caught in the act,
+labelled 0. Those 3% are where the model earns its money.
+
+**10 — the LSTM swap and stacking.** Read the table off the screen:
+
+| model | test F1 | decisive calls | error near a change | elsewhere |
+| :-- | --: | --: | --: | --: |
+| SimpleRNN(30) | 0.952 | 95.0% | 25.6% | 3.9% (6.5x) |
+| LSTM(30) | **0.953** | **96.3%** | **30.2%** | 3.8% (8.0x) |
+| stacked SimpleRNN x2 | 0.941 | **69.5%** | 25.6% | 5.2% (5.0x) |
+
+Three honest beats. (a) **Stacking made it worse** - lower F1 AND it hedges on a third of its calls. More capacity
+is a hyperparameter, not an upgrade. (b) **The LSTM barely wins**, 0.953 vs 0.952. (c) ⚠️ **The LSTM is WORSE at
+transitions** - 30.2% vs the SimpleRNN's 25.6% - which is exactly where its memory should have helped. Say that out
+loud: it tells you this dataset has very little sequence in it, which is the same thing persistence at 0.99 is
+telling you. It is a lesson about the *data*, not about LSTMs.
+
+**Balanced vs imbalanced.** The room is **78.4% empty**. The majority-class baseline scores **accuracy 0.795,
+weighted F1 0.704, macro F1 0.443**. Point at macro: the occupied class scores F1 = 0 and macro refuses to hide it.
+`metrics_table()` shows every intermediate column - TP/FP/FN, precision, recall, F1, support, n_c x F1 - so a
+student can trace one number from the confusion matrix to the summary line.
+
+**10b — reload and explain.** Two days it never saw: **accuracy 0.974, macro F1 0.972**; persistence on the same
+days **0.990**; always-guess-empty **accuracy 0.637, macro F1 0.389**. Then the grid framing: every sample is a
+10 x 5 block, **permutation erases a COLUMN** (shuffle one sensor across windows), **occlusion erases a ROW** (all
+five sensors at one minute, replaced by training means). No saliency anywhere - that is its own notebook.
+
 ## Per-video one-liners (M4.1 numbers verified against the stored Keras 3 outputs on 2026-09-15; M4.2+ still quote what's on screen)
 
 1. **Window method.** Shuffle Boston/California and nothing changes; shuffle a temperature series and you've destroyed it. The window method *deliberately* destroys the order — past 10 days become 10 columns — so any model works. 90/10 **chronological** split (no shuffle, or you leak the future). Dense net, **361** params, MAE **1.80** on screen. Close with the trap: a 45° scatter *plus* a time-series plot, because a model can look great by just repeating yesterday.
