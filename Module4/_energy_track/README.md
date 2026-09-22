@@ -8,8 +8,8 @@
 | :-- | :-- | :-- | :-- |
 | 8B | 8 · occupancy window method | `E1_Multivariate_Demand_Lags` | lag table for target + covariates, two dense nets (demand lags vs + weather), the two honest plots |
 | 9B–10B | 9–10 · occupancy RNN Pt 1/2 | `E2_Multivariate_Demand_RNN` | `split_sequences`, target last, SimpleRNN → LSTM swap → stacked, bake-off vs baselines, peak-hour sigmoid head |
-| 14B | 14 · ConvLSTM on temperature/occupancy | `E3_Advanced_Demand_RNN` | Conv1D + MaxPooling1D → LSTM, recurrent dropout, stacking, Bidirectional, bake-off |
-| 15B | 15 · many-to-many (a) + (b) | `E4_Many_To_Many_Demand` | two targets (demand + temperature), then past week → next 24 hours with MAE-by-horizon |
+| 14B | 14 · ConvLSTM on temperature/occupancy | `A3_Multivariate_Energy_RNN` | Conv1D + MaxPooling1D → LSTM, recurrent dropout, stacking, Bidirectional, bake-off |
+| 15B | 15 · many-to-many (a) + (b) | `A4_Many_to_Many_Energy` | two targets (demand + temperature), then past week → next 24 hours with MAE-by-horizon |
 
 **If Option B is adopted:** the capstone `Forecasting_Electricity_Demand_RNN` (videos 16–17) becomes the M4.3 *wrap-up* rather than a new dataset — its baselines/EDA half can shrink because students have seen the data since video 8. **If Option A stays:** delete this folder; nothing else references it.
 

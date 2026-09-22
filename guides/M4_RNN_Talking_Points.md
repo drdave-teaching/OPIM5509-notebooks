@@ -33,13 +33,13 @@ Twenty-five videos across sixteen notebooks (🔴 markers placed after the Keras
 | 11 | Predict the stock market (an honest result) | `Simple_Predict_The_Stock_Market_DL` | `1_r89vibek` 7:50 |
 
 | **M4.3 — Advanced + the capstone** | | | |
-| 14 | ConvLSTM on the temperature and occupancy series | `Univariate_Temperature_RNN_Advanced` + `Multivariate_Occupancy_RNN_AdvancedTopics` | `1_3bfa459i` 4:30 |
+| 14 | ConvLSTM on the temperature and occupancy series | `A2_Univariate_Temperature_Advanced` + `Multivariate_Occupancy_RNN_AdvancedTopics` | `1_3bfa459i` 4:30 |
 | 15 | Many-to-many: two targets at once, then multi-step ahead | `a_Many_To_Many_BDL_tmpf_and_vsby` + `b_..._tmpfPlus1` | `1_hru76zg7` 8:05 |
 | 16 | Forecasting electricity demand, Pt 1: data, baselines, a univariate LSTM | `Forecasting_Electricity_Demand_RNN` | NEW (Fall 2026) |
 | 17 | Forecasting electricity demand, Pt 2: add the weather, 24 hours ahead, call the peak | `Forecasting_Electricity_Demand_RNN` | NEW (Fall 2026) |
 | 17b | Demand Pt 2b: reload, forecast 2020, watch the distribution shift | `Forecasting_Electricity_Demand_RNN_pt2` | NEW (Fall 2026) |
-| 18 | Tomorrow, three ways: recursive vs direct vs multi-output, and where future covariates come from | `Multi_Step_Forecasting_Strategies` | NEW (Fall 2026) |
-| 18b | Another use case: two weeks of daily demand — past demand or the weather forecast? | `Multi_Step_Forecasting_Strategies` (second half) | NEW (Fall 2026) |
+| 18 | Tomorrow, three ways: recursive vs direct vs multi-output, and where future covariates come from | `A5_Multi_Step_Forecasting` | NEW (Fall 2026) |
+| 18b | Another use case: two weeks of daily demand — past demand or the weather forecast? | `A5_Multi_Step_Forecasting` (second half) | NEW (Fall 2026) |
 | 19 | What is the LSTM looking at? xAI for sequences | `Explaining_an_LSTM` | NEW (Fall 2026) |
 | 19b | Gradient saliency, and how to check that it isn't lying to you | `Gradient_Saliency_by_Hand` | NEW (Fall 2026) — **unscheduled**, Dave records it when he's ready |
 
