@@ -1,2 +1,5 @@
 *.preview.html
 .ipynb_checkpoints/
+*_KEY.ipynb
+*_ANSWERKEY.ipynb
+*_SOLUTION.ipynb
