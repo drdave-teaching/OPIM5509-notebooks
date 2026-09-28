@@ -18,7 +18,7 @@ Notebooks for this module: **[Module 1 →](../Module1/)**
 
 There is also an **optional appendix** with no video — [`5_Appendix_ROC_AUC_and_Thresholds.ipynb`](../Module1/5_Appendix_ROC_AUC_and_Thresholds.ipynb) — for students who want the ROC curve built from scratch rather than handed to them.
 
-## Module 2 — Dense Neural Networks *(Weeks 3–5, Fall 2026)*
+## Module 2 — Dense Neural Networks *(Weeks 3–4, Fall 2026)*
 
 | Guide | Who it's for | What's in it |
 | :-- | :-- | :-- |
@@ -27,10 +27,27 @@ There is also an **optional appendix** with no video — [`5_Appendix_ROC_AUC_an
 
 Notebooks for this module: **[Module 2 →](../Module2/)** — video guide follows once the new recordings are up.
 
+## Module 4 — Recurrent Networks for Numeric Sequences *(Weeks 8–11, Fall 2026)*
+
+| Guide | Who it's for | What's in it |
+| :-- | :-- | :-- |
+| [🎙 **Talking Points**](M4_RNN_Talking_Points.md) | Instructor | The recording plan: running order, verified numbers, through-lines, guardrails |
+| [✅ **Skills Sheet**](M4_RNN_Skills.md) | Students | The checklist of what you should own before Module 5 |
+
+Notebooks for this module: **[Module 4 →](../Module4/)**
+
+## Module 5 — Deep Learning for Text *(Week 12 + Thanksgiving week, Fall 2026)*
+
+| Guide | Who it's for | What's in it |
+| :-- | :-- | :-- |
+| [🎙 **Talking Points**](M5_Text_Talking_Points.md) | Instructor | The 12-video plan: bag of words (M5.1) → sequence (M5.2) → the Bluesky capstone, with the macro-F1 scoreboard and what changed since 2022 |
+
+Notebooks for this module: **[Module 5 →](../Module5/)**
+
 ---
 
 ## About the 🔴 markers
 
-Module 1 notebooks contain cells that render as a bare red dot. Those are **recording markers** — they show where each video starts. The talking points sit inside an HTML comment on the same cell, so they never render for students.
+Module notebooks contain cells that render as a bare red dot. Those are **recording markers** — they show where each video starts. The talking points sit inside an HTML comment on the same cell, so they never render for students.
 
 If you are a student: ignore them. They are not instructions and there is nothing hidden you need.
