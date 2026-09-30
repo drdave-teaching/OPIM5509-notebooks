@@ -40,7 +40,7 @@ Notebooks for this module: **[Module 4 →](../Module4/)**
 
 | Guide | Who it's for | What's in it |
 | :-- | :-- | :-- |
-| [🎙 **Talking Points**](M5_Text_Talking_Points.md) | Instructor | The 12-video plan: bag of words (M5.1) → sequence (M5.2) → the Bluesky capstone, with the macro-F1 scoreboard and what changed since 2022 |
+| [🎙 **Talking Points**](M5_Text_Talking_Points.md) | Instructor | The 13-video plan (6b = SHAP, new): bag of words (M5.1) → sequence (M5.2) → the Bluesky capstone, with the macro-F1 scoreboard and what changed since 2022 |
 
 Notebooks for this module: **[Module 5 →](../Module5/)**
 
