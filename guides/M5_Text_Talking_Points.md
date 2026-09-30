@@ -3,7 +3,7 @@
 **OPIM 5509 - Introduction to Deep Learning · Dr. Dave Wanik · University of Connecticut**
 *Fall 2026 · recording notes — read before you hit record (recording Thursday Oct 1, 2026)*
 
-Thirteen videos across seven notebooks (video **6b**, SHAP, is new on 9/29). The 🔴 markers sit in the notebooks where each video starts; the full talking points live inside each marker's HTML comment (double-click the red dot while recording). This file is the running order, the per-video one-liner, and what changed since 2022.
+Twelve videos across six notebooks, plus an optional SHAP review notebook (6b, not recorded). The 🔴 markers sit in the notebooks where each video starts; the full talking points live inside each marker's HTML comment (double-click the red dot while recording). This file is the running order, the per-video one-liner, and what changed since 2022.
 
 **Target: ≤8 minutes per video.** The 2022 M5 ran 11 videos, 5:36–17:59. The 14-minute embeddings video and the 18-minute Twitter capstone are split below.
 
@@ -20,7 +20,7 @@ Thirteen videos across seven notebooks (video **6b**, SHAP, is new on 9/29). The
 | 4 | Bag of words vs TF-IDF with classic ML, and what the forest is looking at | `EDA_ML_Storms` | `1_n02ycznd` 5:36 |
 | 5 | The Keras Tokenizer: TF-IDF of the top 10,000 words, 15 storm types | `Tokenizer_FFNN_Storms` | `1_t74xs5wm` 7:33 |
 | 6 | A dense network on TF-IDF: baseline, early stopping, macro F1, class weights | `Tokenizer_FFNN_Storms` | `1_ktrofqie` 8:39 |
-| 6b | **What is the model looking at? SHAP for text** (the forest from video 4 and the network from video 6) | `SHAP_for_Text_Storms` | NEW (Fall 2026) |
+| 6b | *Optional, not recorded:* **What is the model looking at? SHAP for text** (the forest from video 4 and the network from video 6) — a review notebook for students | `SHAP_for_Text_Storms` | NEW (Fall 2026) |
 | **M5.2 — Text as a sequence** | | | |
 | 7 | Tokenize, pad, and the Embedding layer (count its parameters) | `6_1` (to the "pre-trained" heading) | `1_r6lvkx2f` 11:16 + first half of `1_8hnc5erp` |
 | 8 | Learned vs pretrained: GloVe, frozen | `Dave_s_GLoVE_Example` → `6_1` second half | second half of `1_8hnc5erp` 14:09 |
