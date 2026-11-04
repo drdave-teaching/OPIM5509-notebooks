@@ -5,6 +5,7 @@ scored against the real load by the class leaderboard.
 
 | Notebook | What you build | Ships with `range_method` |
 | :-- | :-- | :-- |
+| [Energy_Project_Setup_5509](https://github.com/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/Energy_Project_Setup_5509.ipynb) | **Start here, once (about 45 minutes):** your Google Cloud project, your fork of energy-forecasting, your ISO Express account, and the hourly functions your LSTM runs in | |
 | [FP1_Basic_LSTM_Forecast](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/FP1_Basic_LSTM_Forecast.ipynb) | A two-input LSTM: the past week of load, then the next 24 hours of weather and calendar. One forecast per hour. | `none` |
 | [FP2_Probabilistic_LSTM](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/FP2_Probabilistic_LSTM.ipynb) | The same LSTM predicting 20 percentiles per hour (pinball loss), scored with CRPS, then three ways to build the 80% range on real HRRR weather forecasts | `lstm_hrrr_runs` (A), `lstm_quantiles` (B) or `lstm_quantiles_pooled` (C) |
 
