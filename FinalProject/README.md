@@ -9,6 +9,11 @@ scored against the real load by the class leaderboard.
 | [FP1_Basic_LSTM_Forecast](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/FP1_Basic_LSTM_Forecast.ipynb) | A two-input LSTM: the past week of load, then the next 24 hours of weather and calendar. One forecast per hour. | `none` |
 | [FP2_Probabilistic_LSTM](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/FP2_Probabilistic_LSTM.ipynb) | The same LSTM predicting 20 percentiles per hour (pinball loss), scored with CRPS, then three ways to build the 80% range on real HRRR weather forecasts | `lstm_hrrr_runs` (A), `lstm_quantiles` (B) or `lstm_quantiles_pooled` (C) |
 
+**Deep learning only.** The forecast that goes live must come from a Keras network you trained (LSTM, GRU, Conv1D,
+Dense, or a stack or ensemble of them inside one `model.keras`), run by `forecast-24h-dl`. No scikit-learn, gradient
+boosting or hand-written rules in production. The [OPIM 5509 leaderboard](https://storage.googleapis.com/opim5509-leaderboard-f26/index.html)
+only scores forecasts made by `forecast-24h-dl` with a Keras network (Part 9 of FP1 joins it, once).
+
 Both notebooks use the same `make_inputs` function as the cloud function `forecast-24h-dl` in
 [drdave-teaching/energy-forecasting](https://github.com/drdave-teaching/energy-forecasting): if you change it in a
 notebook, change it there too. Train and save your model **in Colab** (a model saved by a newer Keras on a laptop may
