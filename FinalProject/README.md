@@ -32,6 +32,7 @@ What the notebooks scored on 2026 (CRPS skill against "same hour yesterday", hig
 | FP2 option A, 3 weather runs | HRRR as issued | 0.55 | 15% |
 | FP2 option B, model percentiles | HRRR as issued | 0.64 | 47% |
 | FP2 option C, both pooled | HRRR as issued | 0.65 | 51% |
+| FP2b champion (GRU, Conv1D in front) + pooled + `range_widen` 1.2, picked on 2025 | HRRR as issued | 0.68 | 64% |
 
 Every notebook trains on 2023-2024, validates (early stopping, tuning) on 2025 and tests once on 2026.
 
