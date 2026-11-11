@@ -26,7 +26,7 @@ What the notebooks scored on 2026 (CRPS skill against "same hour yesterday", hig
 
 | | Weather | CRPS skill | Hours inside the 80% range |
 | :-- | :-- | --: | --: |
-| FP1, one forecast per hour | what actually happened | 0.51 | (no range) |
+| FP1, one forecast per hour | what actually happened | 0.52 | (no range) |
 | FP1b champion (GRU, Conv1D in front, picked on 2025) | what actually happened | 0.59 | (no range) |
 | FP2, 20 percentiles | what actually happened | 0.70 | 52% |
 | FP2 option A, 3 weather runs | HRRR as issued | 0.55 | 15% |
