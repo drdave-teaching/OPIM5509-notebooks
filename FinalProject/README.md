@@ -5,7 +5,7 @@ scored against the real load by the class leaderboard.
 
 | Notebook | What you build | Ships with `range_method` |
 | :-- | :-- | :-- |
-| [Energy_Project_Setup_5509](https://github.com/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/Energy_Project_Setup_5509.ipynb) | **Start here, once (about 45 minutes):** your Google Cloud project, your fork of energy-forecasting, your ISO Express account, and the hourly functions your LSTM runs in | |
+| [Energy_Project_Setup_5509](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/Energy_Project_Setup_5509.ipynb) (open in Colab and copy from there) | **Start here, once (about 45 minutes):** your Google Cloud project, your fork of energy-forecasting-dl, your ISO Express account, and the hourly functions your LSTM runs in | |
 | [FP1_Basic_LSTM_Forecast](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/FP1_Basic_LSTM_Forecast.ipynb) | A basic LSTM in the Module 4 style: one table per forecast (the past week of load, then the next 24 hours of weather and calendar with the load hidden), `Sequential` LSTM, `Dense(24)` for the whole next day. One forecast per hour. | `none` |
 | [FP1b_Tune_Your_LSTM](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/FP1b_Tune_Your_LSTM.ipynb) | Tune the Part 1 network in rounds (Conv1D + pooling, stacked layers, units, GRU or LSTM, dropout) on your own tuning leaderboard, picked on 2025; actual-vs-predicted and holdout plots; ship the winner | `none` |
 | [FP2_Probabilistic_LSTM](https://colab.research.google.com/github/drdave-teaching/OPIM5509-notebooks/blob/main/FinalProject/FP2_Probabilistic_LSTM.ipynb) | The same LSTM predicting 20 percentiles per hour (pinball loss), scored with CRPS, then three ways to build the 80% range on real HRRR weather forecasts | `lstm_hrrr_runs` (A), `lstm_quantiles` (B) or `lstm_quantiles_pooled` (C) |
@@ -17,8 +17,8 @@ scikit-learn, gradient boosting, random or quantile forests, XGBoost or hand-wri
 baseline in your report). The [OPIM 5509 leaderboard](https://storage.googleapis.com/opim5509-leaderboard-f26/index.html)
 only scores forecasts made by `forecast-24h-dl` with a Keras network (Part 9 of FP1 joins it, once).
 
-Each notebook's input function (`make_window` in FP1, `make_inputs` in FP1b, FP2 and FP2b) is copied word for word into the cloud function `forecast-24h-dl` in
-[drdave-teaching/energy-forecasting](https://github.com/drdave-teaching/energy-forecasting): if you change it in a
+Each notebook's input function (`make_window` in FP1, `make_inputs` in FP1b, FP2 and FP2b) has a copy in the cloud function `forecast-24h-dl` in
+[drdave-teaching/energy-forecasting-dl](https://github.com/drdave-teaching/energy-forecasting-dl): if you change it in a
 notebook, change it there too. Train and save your model **in Colab** (a model saved by a newer Keras on a laptop may
 not load elsewhere).
 
