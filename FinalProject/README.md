@@ -14,7 +14,7 @@ scored against the real load by the class leaderboard.
 **Deep learning only.** The forecast that goes live must come from a Keras network you trained (LSTM, GRU, Conv1D,
 Dense, or a stack or ensemble of them inside one `model.keras`), run by `forecast-24h-dl`. Keras models only: no
 scikit-learn, gradient boosting, random or quantile forests, XGBoost or hand-written rules in production (fine as a
-baseline in your report). The [OPIM 5509 leaderboard](https://storage.googleapis.com/opim5509-leaderboard-f26/index.html)
+baseline in your report). The [OPIM 5509 leaderboard](https://storage.googleapis.com/opim5509-dl-leaderboard-f26/index.html)
 only scores forecasts made by `forecast-24h-dl` with a Keras network (Part 9 of FP1 joins it, once).
 
 Each notebook's input function (`make_window` in FP1, `make_inputs` in FP1b, FP2 and FP2b) has a copy in the cloud function `forecast-24h-dl` in
